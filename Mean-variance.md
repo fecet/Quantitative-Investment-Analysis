@@ -178,6 +178,57 @@ hence its intercept at $\sigma_p=0$ is
 
 $$ \overline{r}_p-\frac{\delta\xi-\alpha^2}{\delta(\overline{r}_p-\frac{\alpha}{\delta})}\sigma_p^2=\overline{r}_p-\frac{\delta\xi-\alpha^2}{\delta(\overline{r}_p-\frac{\alpha}{\delta})} (\frac{1}{\delta}+\frac{\delta({\overline{r}_p-\frac{\alpha}{\delta}})^2}{\delta\xi-\alpha^2})=\frac{\alpha}{\delta}-\frac{\delta\xi-\alpha^2}{\delta^2(\overline{r}_p-\alpha/\delta)} =\overline{r}_q$$
 
+Let $\overline{r}_q=0$, then
+
+$$ \frac{\alpha}{\delta}-\frac{\delta\xi-\alpha^2}{\delta^2(\overline{r}_p-\alpha/\delta)}=0 $$
+
+solve for $\overline{r}_p$, we get
+
+$$ \overline{r}_p=\frac{\delta\xi-\alpha^2}{\alpha\delta}+\frac{\alpha}{\delta} $$
+
+Substituted in $a+b\overline{r}_p$:
+
+$$ \omega_D=-\frac{\mathbf{V^-e}}{\delta}+\frac{\mathbf{V^-\overline{r}}}{\alpha}+(a+b)\frac{\alpha}{\delta}=-\frac{\mathbf{V^-e}}{\delta}+\frac{\mathbf{V^-\overline{r}}}{\alpha}+\frac{\mathbf{V^-e}}{\delta}=\frac{\mathbf{V^-\overline{r}}}{\alpha}$$
+
+# Risk-free asset
+
+Suppose we have a riskless asset with return $r_f$, and we  assign $\omega_0$ weight on it. Then the portfolio choice problem becomes
+
+$$ \min_{\omega,\omega_0} \frac{1}{2}\omega'\mathbf{V}\omega \quad s.t. \quad \mathbf{e'\omega}+\omega_0=1, \mathbf{\omega'\overline{r}}+\omega_0 r_f=\overline{r}_p $$
+
+substitute $\omega_0=1-\mathbf{e'\omega}$, then
+
+$$ \mathbf{\omega'\overline{r}}+ (1-\mathbf{e'\omega})r_f=\overline{r}_p\implies \omega'(\mathbf{\overline{r}}-r_f\mathbf{e})+r_f=\overline{r}_p $$
+
+The problem is
+
+$$ \min_{\omega,\omega_0} \frac{1}{2}\omega'\mathbf{V}\omega \quad s.t.\quad \omega'(\mathbf{\overline{r}}-r_f\mathbf{e})+r_f=\overline{r}_p $$
+
+Again by the Lagrangian:
+
+$$ L=\frac{1}{2}\omega'\mathbf{V}\omega+\lambda(\overline{r}_p-\omega'(\mathbf{\overline{r}}-r_f\mathbf{e})-r_f) $$
+
+$$ \frac{\partial L}{\partial\omega}=\mathbf{V}\omega-\lambda(\mathbf{\overline{r}}-r_f\mathbf{e})=0\implies \omega^*=\lambda\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e}) $$
+
+$$ \overline{r}_p-{\omega^{*}}'(\mathbf{\overline{r}}-r_f\mathbf{e})-r_f=0\implies\lambda=\frac{\overline{r}_p-r_f}{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})} $$
+
+$$ \sigma_p^2=\omega'\mathbf{V}\omega= \lambda^2(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-\mathbf{V}\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})=\frac{(\overline{r}_p-r_f)^2}{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}$$
+
+In geometry view, the frontier degenerate into two crossing line:
+
+$$ \overline{r}_p=r_f\pm \sqrt{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}\sigma_p $$
+
+## One Fund Theorem
+
+Substitue $\lambda$ in the expression of $\omega^*$:
+
+$$ \omega^*= \frac{\overline{r}_p-r_f}{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}$$
+
+
+
+
+
+
 
 
 
