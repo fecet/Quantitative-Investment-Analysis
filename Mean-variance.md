@@ -178,8 +178,6 @@ hence its intercept at $\sigma_p=0$ is
 
 $$ \overline{r}_p-\frac{\delta\xi-\alpha^2}{\delta(\overline{r}_p-\frac{\alpha}{\delta})}\sigma_p^2=\overline{r}_p-\frac{\delta\xi-\alpha^2}{\delta(\overline{r}_p-\frac{\alpha}{\delta})} (\frac{1}{\delta}+\frac{\delta({\overline{r}_p-\frac{\alpha}{\delta}})^2}{\delta\xi-\alpha^2})=\frac{\alpha}{\delta}-\frac{\delta\xi-\alpha^2}{\delta^2(\overline{r}_p-\alpha/\delta)} =\overline{r}_q$$
 
-[]()
-
 
 
 
