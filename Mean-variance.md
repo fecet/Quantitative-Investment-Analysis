@@ -91,7 +91,7 @@ In geometry view
 
 $$ \frac{\sigma_p^2}{1/\delta}-\frac{({\overline{r}_p-\frac{\alpha}{\delta}})^2}{(\delta\xi-\alpha^2)/\delta^2}=1 $$
 
-it's a hyperbola with center $(0,\alpha/\delta)$ and asymptote ${\overline{r}_p=\frac{\alpha}{\delta}\pm \sqrt{\frac{\delta\xi -\alpha^2}{\xi}}\sigma_p}$(recall that asymptote is $y=\pm\frac{b}{a}x$ in $\frac{x^2}{a^2}-\frac{y^2}{b^2}=1$).
+it's a hyperbola with center $(0,\alpha/\delta)$ and asymptote ${\overline{r}_p=\frac{\alpha}{\delta}\pm \sqrt{\frac{\delta\xi -\alpha^2}{\delta}}\sigma_p}$(recall that asymptote is $y=\pm\frac{b}{a}x$ in $\frac{x^2}{a^2}-\frac{y^2}{b^2}=1$).
 
 ## Two Fund Theorem
 
@@ -109,8 +109,7 @@ If ${r_1,r_2\ge \frac{\alpha}{\delta}}$, thus they are on efficient frontier, th
 
 $$ c{r_1}+(1-c){r_2}=\frac{\alpha}{\delta}+c({r_1-}\frac{\alpha}{\delta})+(1-c)({r_2}-\frac{\alpha}{\delta})\ge \frac{\alpha}{\delta} $$
 
-that is, any convex combination of efficient frontier portfolios will be an efficient
-frontier portfolio.
+that is, any convex combination of efficient frontier portfolios will be an efficient frontier portfolio.
 
 ## Decomposition
 
@@ -222,11 +221,99 @@ $$ \overline{r}_p=r_f\pm \sqrt{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^
 
 Substitue $\lambda$ in the expression of $\omega^*$:
 
-$$ \omega^*= \frac{\overline{r}_p-r_f}{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}$$
+$$ \omega^*= \frac{(\overline{r}_p-r_f)}{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})$$
 
+We denote $c=\frac{(\overline{r}_p-r_f)}{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}$(since it's a scalar) and $\tilde{\omega}=\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})$ then we can write
 
+$$ \omega^*=c\tilde{\omega} $$
 
+That is so called one fund theorem
 
+> When $r_f\ne r_{mv}$ any minimal-variance frontier portfolio is a combination of the tangency portfolio (with risk assets only) and the riskless asset
+
+Normalized $\tilde{\omega}$($\frac{\tilde{\omega}}{\mathbf{e'}\tilde{\omega}}$) is the tangecy portfolio, i.e. $\omega_D=\frac{\tilde{\omega}}{\mathbf{e'}\tilde{\omega}}$, the reason is showing below.
+
+Now we prove the degenerated frontier is tangent to the the origin frontier, that is, the hyperbola $\frac{\sigma_p^2}{1/\delta}-\frac{({\overline{r}_p-\frac{\alpha}{\delta}})^2}{(\delta\xi-\alpha^2)/\delta^2}=1$. Assume they do tangent and the tangent point is $(\sigma_p,\overline{r}_p)$ 
+
+Recall the polar of $(x_0,y_0)$ w.r.t. $\frac{x^2}{a^2}-\frac{y^2}{b^2}=1$ is $\frac{x_0x}{a^2}-\frac{y_0y}{b^2}=1$ and the slope is 
+$$ \frac{b^2x_0}{a^2y_0}=\sqrt{\frac{b^4x_0^2}{a^4y_0^2}}=\sqrt{\frac{b^2(a^2b^2+a^2y_0^2)}{a^4y_0^2}} $$
+Then since the tangent line through $(0,r_f)$:
+
+$$ \begin{aligned}
+  -\frac{({\overline{r}_p-\frac{\alpha}{\delta}})(r_f-\frac{\alpha}{\delta})}{\Delta/\delta^2}=1
+\end{aligned} $$
+
+solved for $\overline{r}_p$:
+
+$$ \overline{r}_p=\frac{-\alpha^2+r_f\alpha\delta-\Delta}{\delta(-\alpha+r_f\delta)}=\frac{\xi-r_f\alpha}{\alpha-r_f\delta} $$
+
+the square of slope is
+
+$$
+\begin{aligned}
+  \frac{\Delta  \left(\frac{\Delta }{\delta ^3}+\frac{\left({y_0}-\frac{\alpha }{\delta }\right)^2}{\delta }\right)}{\left(y_0-\frac{\alpha }{\delta }\right)^2}&=\frac{\Delta  \left(\alpha ^2+\Delta +\delta ^2 y_0^2-2 \alpha  \delta  y_0\right)}{\delta  (\alpha -\delta  y_0^2}
+  \\&=\frac{\Delta  \left(\alpha ^2+\Delta -\frac{2 \alpha  \left(-\alpha ^2-\Delta +\alpha  \delta  r_f\right)}{\delta  r_f-\alpha }+\frac{\left(-\alpha ^2-\Delta +\alpha  \delta  r_f\right)^2}{(\delta  r_f-\alpha )^2}\right)}{\delta  \left(\alpha -\frac{-\alpha ^2-\Delta +\alpha  \delta  r_f}{\delta  r_f-\alpha }\right)^2}
+  \\&=\frac{\alpha ^2+\Delta +\delta ^2 r_f^2-2 \alpha  \delta  r_f}{\delta }
+  \\&=\xi+\delta r_f^2-2\alpha r_f
+\end{aligned}
+$$
+
+Which is equal to
+
+$$ (\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})=\xi+\delta r_f^2-2\alpha r_f $$
+
+Hence our assumption is correct. Consider the tangency portfolio:
+
+$$ \overline{r}_p=\frac{\xi-r_f\alpha}{\alpha-r_f\delta}=\frac{\Delta/\delta^2}{r_{mv}-r_f}+r_{mv} $$
+
+If $r_f=\frac{\alpha}{\delta}=r_{mv}$, the tangent point doesn't exist and the frontier becomes asymptotes. If $r_f> r_{mv}$, then the tangent point is in the lower straight line and vice versa.
+
+The weight is
+
+$$ \omega^*=a+b\overline{r}_p=\frac{\mathbf{V^-}(\overline{r}-r_f\mathbf{e})}{\alpha-\delta r_f}=\frac{\mathbf{V^-}(\overline{r}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{r}-r_f\mathbf{e})}=\frac{\tilde{\omega}}{\mathbf{e}'\tilde{\omega}} $$
+
+That is why we called $\tilde{\omega}$ tangency portfolio.
+
+## Sharpe ratio
+
+The shrpe ratio is defined by
+
+$$S_p= \frac{\omega'(\mathbf{\overline{r}}-r_f\mathbf{e})}{\sqrt{\omega'\mathbf{V}\omega}} $$
+
+Which can be interpreted as a measure of **expected excess return per unit of risk**.
+
+To maximize $S_p$, suppose
+
+$$ \frac{\partial S_p}{\partial \omega}=0 $$
+
+Let $\mathbf{r}:=\mathbf{\overline{r}}-r_f\mathbf{e}$
+
+$$\phi: w\mapsto \begin{bmatrix}\omega^T\mathbf{r} \\ \omega'\mathbf{V}\omega\end{bmatrix},\quad h(x,y):=\frac x {y^{1/2}}$$
+Then $S_p = h\circ\phi(w)$, and thus
+
+$$ \begin{aligned}
+  \frac{\partial S_p}{\partial \omega}&=\frac{\partial h}{\partial \phi}\frac{\partial \phi}{\partial \omega}\\&=
+  \nabla h(\phi(\omega))\nabla\phi(\omega)
+  \\&=\begin{bmatrix}
+    \frac{1}{( \omega'\mathbf{V}\omega)^{1/2}} &
+    -\frac{\omega'\mathbf{r}}{2( \omega'\mathbf{V}\omega)^{3/2}}
+  \end{bmatrix}
+  \begin{bmatrix}
+    \mathbf{r}
+    \\2\mathbf{V}\omega
+  \end{bmatrix}
+  \\&=\frac{ \omega'\mathbf{V}\omega \mathbf{r}-\omega'\mathbf{r}\mathbf{V}\omega}{( \omega'\mathbf{V}\omega)^{3/2}}
+\end{aligned} $$
+
+Setting to zero, 
+
+$$   \omega'\mathbf{V}\omega \mathbf{r}-\omega'\mathbf{r}\mathbf{V}\omega=\mathbf{0}\implies\omega=\frac{ \omega'\mathbf{V}\omega }{\omega'\mathbf{r}}\mathbf{V^-r}$$
+
+Note the scale of $\omega$ is independent to $S_p$. If we assume $\mathbf{e'\omega}=1$ additionally, then 
+
+$$ \omega=\frac{\mathbf{V^-r}}{\mathbf{eV^-r}}=\frac{\mathbf{V^-}(\overline{r}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{r}-r_f\mathbf{e})}=\frac{\tilde{\omega}}{\mathbf{e}'\tilde{\omega}}=\omega_D $$
+
+$\omega_D$ is the only maxima on the frontier without risk-free asset. However, every portfolio on the frontier with a risk-free asset has the maximal sharpe ratio by one fund theorem($\omega^*=c\tilde{\omega}$) if $r_f>r_{mv}$. Otherwise, $\omega_D$ is on the lower straight line and become a minima.
 
 
 
