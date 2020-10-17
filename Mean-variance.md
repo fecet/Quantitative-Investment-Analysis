@@ -13,15 +13,15 @@ output:
 export_on_save:
   pandoc: true
 ---
-$$R_p=\frac{\sum R_i\omega_iW_0}{W_0}=\omega'R$$
 
-$$ \mathbf{r_p}=R_p-1=\omega'\mathbf{r} $$
+# Risky Assets
+Suppose $\mathbf{r}$ is a $n\times 1$ random vector with mean $\overline{\mathbf{r}}$ and invertible variance $\mathbf{V}$, then the portofolio return is
 
-where $\mathbf{r}$ is random vector with mean $\overline{\mathbf{r}}$ and variance $\mathbf{V}$.
+$$ \mathbf{r_p}=\omega'\mathbf{r} $$
 
 hence $E[\mathbf{r_p}]=\omega'\mathbf{\overline{r}}$ and 
 
-$$ \text{Cov}(\mathbf{r})=\text{cov}(\mathbf{\omega'r})=\mathbf{\omega'\text{Cov}(r)\omega}=\mathbf{\omega'V\omega} $$
+$$ \text{Cov}(\mathbf{\overline{r}_p})=\text{cov}(\mathbf{\omega'r})=\mathbf{\omega'\text{Cov}(r)\omega}=\mathbf{\omega'V\omega} $$
 
 Then the problem is 
 
@@ -55,9 +55,9 @@ $$ \left[\begin{array}{cc}
   1
 \end{array}\right]$$
 
-Note $\delta\xi-\alpha^2>0$ since $\mathbf{(\alpha\overline{r}-\xi e)'V^-(\alpha\overline{r}-\xi e)}=\xi(\delta\xi-\alpha^2)>0$ and thus such equations is consistent.
+Note $\Delta=\delta\xi-\alpha^2>0$ since $\mathbf{(\alpha\overline{r}-\xi e)'V^-(\alpha\overline{r}-\xi e)}=\xi(\delta\xi-\alpha^2)>0$ and thus such equations is consistent.
 
-solve and get
+solve ($\mathbf{Ax=b}\implies \mathbf{x=A^-b}$):
 
 $$ \lambda=\frac{\delta \overline{r}_p-\alpha}{\delta\xi-\alpha^2},\gamma=\frac{\xi-\alpha\overline{r}_p}{\delta\xi-\alpha^2} $$
 
@@ -73,21 +73,23 @@ where $a=\frac{\mathbf{\xi V^-e-\alpha V^- \overline{r}}}{\delta\xi-\alpha^2}$ a
 
 The minimum variance is given by
 
-$$ \sigma_p^2=\mathbf{\omega'^*V\omega^*}=\omega'^*(\mathbf{\lambda\overline{r}+\gamma e})={\lambda\overline{r}_p+\gamma}=\frac{1}{\delta}+\frac{\delta({\overline{r}_p-\frac{\alpha}{\delta}})^2}{\delta\xi-\alpha^2} $$
+$$ \sigma_p^2=\mathbf{\omega'^*V\omega^*}=\omega'^*(\mathbf{\lambda\overline{r}+\gamma e})={\lambda\overline{r}_p+\gamma}$$
 
-Thus the **global minimum variance**(GMV) portfolio is $\frac{1}{\delta}$ when ${\overline{r}_p=\frac{\alpha}{\delta}}$. 
+by some algebra
 
-Meanwhile
+$$ \lambda\overline{r}_p+\gamma=\frac{1}{\delta}+\frac{\delta({\overline{r}_p-\frac{\alpha}{\delta}})^2}{\delta\xi-\alpha^2}  $$
+
+Thus the **global minimum variance**(GMV) portfolio is $\frac{1}{\delta}$ when ${\overline{r}_p=\frac{\alpha}{\delta}}$, meanwhile
 
 $$ \begin{aligned}
-  \lambda&=0\\
-  \gamma&=\frac{1}{\delta}\\
-  \omega_{mv}&=\frac{\mathbf{V^-e}}{\delta}=\frac{\mathbf{V^-e}}{\mathbf{e'V^-e}}
+  \lambda&=\frac{\delta \overline{r}_p-\alpha}{\delta\xi-\alpha^2}=0\\
+  \gamma&=\frac{\xi-\alpha\overline{r}_p}{\delta\xi-\alpha^2}=\frac{\xi-\alpha\frac{\alpha}{\delta}}{\delta\xi-\alpha^2}=\frac{1}{\delta}\\
+  \omega_{mv}&=0+\frac{\mathbf{V^-e}}{\delta}=\frac{\mathbf{V^-e}}{\mathbf{e'V^-e}}
 \end{aligned} $$
 
 ## Geometry
 
-In geometry view
+In geometry view, rewrite $\sigma_p^2=\frac{1}{\delta}+\frac{\delta({\overline{r}_p-\frac{\alpha}{\delta}})^2}{\delta\xi-\alpha^2}$ as
 
 $$ \frac{\sigma_p^2}{1/\delta}-\frac{({\overline{r}_p-\frac{\alpha}{\delta}})^2}{(\delta\xi-\alpha^2)/\delta^2}=1 $$
 
@@ -101,15 +103,32 @@ Suppose ${r_1}$ and ${r_2}$ are any given expected return, note
 
 $$\forall {r_3},\exists x\ni x{r_1}+(1-x){r_2}={r_3}$$
 
-Then the weight combined such way is just what we want
+Then the weight combined such way is just what we want.
+
 
 $$\omega_3=x\omega_1+(1-x)\omega_2= x({a+br_1})+(1-x)({a+br_2})={a+br_3} $$
 
-If ${r_1,r_2\ge \frac{\alpha}{\delta}}$, thus they are on efficient frontier, their convex combine still $\ge \frac{\alpha}{\delta}$
 
-$$ c{r_1}+(1-c){r_2}=\frac{\alpha}{\delta}+c({r_1-}\frac{\alpha}{\delta})+(1-c)({r_2}-\frac{\alpha}{\delta})\ge \frac{\alpha}{\delta} $$
+> Any convex combination of efficient frontier portfolios will be an efficient frontier portfolio.
 
-that is, any convex combination of efficient frontier portfolios will be an efficient frontier portfolio.
+**Proof** A portofolio $\omega$ is on the efficient froniter iff(if and only if)  it's return $\overline{r}_p\ge r_{mv}$ and recall $\omega=a+b \overline{r}_p$, thus there is a bijection between $\omega_i$ and $r_i$. Suppose the return of $\omega_i$ is $r_i$, 
+
+$$\omega=\begin{bmatrix}
+    \omega_1&\cdots&\omega_n
+\end{bmatrix},\mathbf{c}=\begin{bmatrix}
+    c_1\\
+    \vdots\\c_n
+\end{bmatrix}$$
+
+Firstly, verify the convex combination is a legal portfolio:
+
+$$ \mathbf{e'(\omega c)=(e'\omega)c=e'c}=1 $$
+
+since $\forall \omega_i \mathbf{e'\omega_i}=1, \mathbf{e'c}=1$. Then it's sufficient to show that $\mathbf{c'r} \ge r_{mv}$. It's clearly since
+
+$$ \mathbf{c'r}=\sum c_i\omega_i\ge \sum c_i \min(r_i)=\min(r_i)\sum c_i=\min(r_i)\ge r_{mv} $$
+
+
 
 ## Decomposition
 
@@ -157,7 +176,7 @@ One can reduce $\epsilon_p$ to zero to avoid idiot risk and get a frontier portf
 
 ## Zero covariance
 
-Recall the covariance between $p$ and $q$, now suppose they are both on frontier:
+Continue the discussion of the covariance between $p$ and $q$, now suppose they are both on frontier:
 
 $$ \begin{aligned}
   \omega_p'\mathbf{V}\omega_q=\frac{1}{\delta}+\frac{\delta(\overline{r}_p-\frac{\alpha}{\delta})(\overline{r}_q-\frac{\alpha}{\delta})}{\delta\xi-\alpha^2}
@@ -167,13 +186,17 @@ Setting this to $0$ and slove for $\overline{r}_q$
 
 $$ \overline{r}_q=\frac{\alpha}{\delta}-\frac{\delta\xi-\alpha^2}{\delta^2(\overline{r}_p-\alpha/\delta)} $$
 
-Suppose the tagent line in $\overline{r}_p$, which slope is
+Then we are ready to show that
+
+> $\overline{r}_q$ is equal to the intercept of the tangent line to MVF at $(\overline{r}_p,\sigma_p)$ 
+
+Suppose the tagent line in $\overline{r}_p$, the slope is 
 
 $$ \frac{\partial \overline{r}_p}{\partial \sigma_p}=\frac{\delta\xi-\alpha^2}{\delta(\overline{r}_p-\frac{\alpha}{\delta})}\sigma_p $$
 
 (Recall $\frac{x^2}{a^2}-\frac{y^2}{b^2}=1\implies \frac{2x}{a^2}-\frac{2yy'}{b^2}=0\implies y'=\frac{b^2x^2}{a^2y^2}$)
 
-hence its intercept at $\sigma_p=0$ is
+thus its intercept at $\sigma_p=0$ is
 
 $$ \overline{r}_p-\frac{\delta\xi-\alpha^2}{\delta(\overline{r}_p-\frac{\alpha}{\delta})}\sigma_p^2=\overline{r}_p-\frac{\delta\xi-\alpha^2}{\delta(\overline{r}_p-\frac{\alpha}{\delta})} (\frac{1}{\delta}+\frac{\delta({\overline{r}_p-\frac{\alpha}{\delta}})^2}{\delta\xi-\alpha^2})=\frac{\alpha}{\delta}-\frac{\delta\xi-\alpha^2}{\delta^2(\overline{r}_p-\alpha/\delta)} =\overline{r}_q$$
 
@@ -189,6 +212,8 @@ Substituted in $a+b\overline{r}_p$:
 
 $$ \omega_D=-\frac{\mathbf{V^-e}}{\delta}+\frac{\mathbf{V^-\overline{r}}}{\alpha}+(a+b)\frac{\alpha}{\delta}=-\frac{\mathbf{V^-e}}{\delta}+\frac{\mathbf{V^-\overline{r}}}{\alpha}+\frac{\mathbf{V^-e}}{\delta}=\frac{\mathbf{V^-\overline{r}}}{\alpha}$$
 
+That is the tangency portofolio. If $\overline{r}_q>0$, $\overline{r}_q$ can be interpreted as risk-free asset return in [next chapter](#beta-representation)
+
 # Risk-free asset
 
 Suppose we have a riskless asset with return $r_f$, and we  assign $\omega_0$ weight on it. Then the portfolio choice problem becomes
@@ -199,7 +224,7 @@ substitute $\omega_0=1-\mathbf{e'\omega}$, then
 
 $$ \mathbf{\omega'\overline{r}}+ (1-\mathbf{e'\omega})r_f=\overline{r}_p\implies \omega'(\mathbf{\overline{r}}-r_f\mathbf{e})+r_f=\overline{r}_p $$
 
-The problem is
+The problem is 
 
 $$ \min_{\omega,\omega_0} \frac{1}{2}\omega'\mathbf{V}\omega \quad s.t.\quad \omega'(\mathbf{\overline{r}}-r_f\mathbf{e})+r_f=\overline{r}_p $$
 
@@ -266,19 +291,19 @@ Hence our assumption is correct. Consider the tangency portfolio:
 
 $$ \overline{r}_p=\frac{\xi-r_f\alpha}{\alpha-r_f\delta}=\frac{\Delta/\delta^2}{r_{mv}-r_f}+r_{mv} $$
 
-If $r_f=\frac{\alpha}{\delta}=r_{mv}$, the tangent point doesn't exist and the frontier becomes asymptotes. If $r_f> r_{mv}$, then the tangent point is in the lower straight line and vice versa.
+If $r_f=\frac{\alpha}{\delta}=r_{mv}$, the tangency doesn't exist and the frontier becomes asymptotes. If $r_f> r_{mv}$, the tangency is in the lower straight line and vice versa.
 
 The weight is
 
-$$ \omega^*=a+b\overline{r}_p=\frac{\mathbf{V^-}(\overline{r}-r_f\mathbf{e})}{\alpha-\delta r_f}=\frac{\mathbf{V^-}(\overline{r}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{r}-r_f\mathbf{e})}=\frac{\tilde{\omega}}{\mathbf{e}'\tilde{\omega}} $$
+$$ \omega^*=a+b\overline{r}_p=\frac{\mathbf{V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}{\alpha-\delta r_f}=\frac{\mathbf{V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}=\frac{\tilde{\omega}}{\mathbf{e}'\tilde{\omega}} $$
 
-That is why we called $\tilde{\omega}$ tangency portfolio.
+That is why we called $\tilde{\omega}$ tangency portfolio. Recall the result in [zero covariance](#zero-covariance), for any portofolio $\overline{r}_p>r_{mv}$, we can find $r_f=\overline{r}_q$ with zero covariance with $\overline{r}_p$ to make $\overline{r}_p$ be a tangency portfolio.
 
 ## Sharpe ratio
 
 The shrpe ratio is defined by
 
-$$S_p= \frac{\omega'(\mathbf{\overline{r}}-r_f\mathbf{e})}{\sqrt{\omega'\mathbf{V}\omega}} $$
+$$S_p=\frac{\overline{r}_p-r_f}{\sigma_p} = \frac{\omega'(\mathbf{\overline{r}}-r_f\mathbf{e})}{\sqrt{\omega'\mathbf{V}\omega}} $$
 
 Which can be interpreted as a measure of **expected excess return per unit of risk**.
 
@@ -286,7 +311,7 @@ To maximize $S_p$, suppose
 
 $$ \frac{\partial S_p}{\partial \omega}=0 $$
 
-Let $\mathbf{r}:=\mathbf{\overline{r}}-r_f\mathbf{e}$
+Let $\mathbf{r}=\mathbf{\overline{r}}-r_f\mathbf{e}$
 
 $$\phi: w\mapsto \begin{bmatrix}\omega^T\mathbf{r} \\ \omega'\mathbf{V}\omega\end{bmatrix},\quad h(x,y):=\frac x {y^{1/2}}$$
 Then $S_p = h\circ\phi(w)$, and thus
@@ -311,9 +336,115 @@ $$   \omega'\mathbf{V}\omega \mathbf{r}-\omega'\mathbf{r}\mathbf{V}\omega=\mathb
 
 Note the scale of $\omega$ is independent to $S_p$. If we assume $\mathbf{e'\omega}=1$ additionally, then 
 
-$$ \omega=\frac{\mathbf{V^-r}}{\mathbf{eV^-r}}=\frac{\mathbf{V^-}(\overline{r}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{r}-r_f\mathbf{e})}=\frac{\tilde{\omega}}{\mathbf{e}'\tilde{\omega}}=\omega_D $$
+$$ \omega=\frac{\mathbf{V^-r}}{\mathbf{e'V^-r}}=\frac{\mathbf{V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}=\frac{\tilde{\omega}}{\mathbf{e}'\tilde{\omega}}=\omega_D $$
 
-$\omega_D$ is the only maxima on the frontier without risk-free asset. However, every portfolio on the frontier with a risk-free asset has the maximal sharpe ratio by one fund theorem($\omega^*=c\tilde{\omega}$) if $r_f>r_{mv}$. Otherwise, $\omega_D$ is on the lower straight line and become a minima.
+$\omega_D$ is the only maxima on the frontier without risk-free asset. However, every portfolio on the frontier with a risk-free asset has the maximal sharpe ratio by one fund theorem($\omega^*=c\tilde{\omega}$) if $r_f>r_{mv}$. (Otherwise $\omega_D$ is on the lower straight line and become a minima).
+
+## Beta representation
+
+Recall the tangency portfolio is $\omega_D=\frac{\mathbf{V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}$. Write $\omega_D=m \mathbf{V^-} (\overline{\mathbf{r}}-r_f\mathbf{e})$ where $m=\frac{1}{\mathbf{e'}\mathbf{V^-} (\overline{\mathbf{r}}-r_f\mathbf{e})}$, then we have
+
+$$ \overline{r}-r_f\mathbf{e}=\frac{1}{m}\mathbf{V}\omega_D $$
+
+Note $\text{Cov}(\mathbf{r},\omega'\mathbf{r})=\mathbf{V\omega}$ and
+
+$$ \sigma_D^2=\omega_D'\mathbf{V}\omega_D=m\omega'_D(\overline{\mathbf{r}}-r_f\mathbf{e})= mr_D-mr_f $$
+
+we have
+
+$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\frac{r_D-r_f}{\sigma_D^2}\text{Cov}(\mathbf{r},{r_D}) $$
+
+Denote $\frac{\text{Cov}(\mathbf{r},{r_D})}{\sigma_D^2}=\beta_D$, we have
+
+$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_D({r_D-r_f}) $$
+
+Similar results also holds for any portfolio $\overline{r}_p$ in the MVF:
+
+$$ \overline{\mathbf{r}}-\overline{r}_q\mathbf{e}=\beta_p(\overline{r}_p-\overline{r}_q) $$
+
+It's clear in the view of every portfolio $\overline{r}_p$ is also a tangency portfolio by selecting proper $r_f$. One can also check it in a dirty way:
+
+**Proof** Suppose $r_p$ and $r_q$ both in the MVF without risk-free asset, recall
+
+$$ \begin{aligned}
+  \omega_p'\mathbf{V}\omega_q=\frac{1}{\delta}+\frac{\delta(\overline{r}_p-\frac{\alpha}{\delta})(\overline{r}_q-\frac{\alpha}{\delta})}{\delta\xi-\alpha^2}
+\end{aligned} $$
+
+If the covariance is $0$, we have
+
+$$ \overline{r}_q=\frac{\alpha}{\delta}-\frac{\delta\xi-\alpha^2}{\delta^2(\overline{r}_p-\alpha/\delta)} $$
+
+Then
+
+$$ \begin{aligned}
+  \mathbf{\overline{r}}-\overline{r}_q \mathbf{e}&=\mathbf{\overline{r}}-(\frac{\alpha}{\delta}-\frac{\delta\xi-\alpha^2}{\delta^2(\overline{r}_p-\alpha/\delta)})\mathbf{e}
+  \\&=\frac{1}{\delta^2(\overline{r}_p-\alpha/\delta)}(\delta^2(\overline{r}_p-\alpha/\delta))(\mathbf{\overline{r}}-(\frac{\alpha}{\delta}-\frac{\delta\xi-\alpha^2}{\delta^2(\overline{r}_p-\alpha/\delta)})\mathbf{e})
+  \\&=\frac{1}{\delta^2(\overline{r}_p-\alpha/\delta)}(\mathbf{\overline{r}}(\delta^2(\overline{r}_p-\alpha/\delta))-(\alpha\delta(\overline{r}_p-\alpha/\delta)-(\delta\xi-\alpha^2))\mathbf{e})
+  \\&=\frac{1}{\delta^2(\overline{r}_p-\alpha/\delta)}(\mathbf{\overline{r}}(\delta^2(\overline{r}_p-\alpha/\delta))-(\alpha\delta\overline{r}_p-\delta\xi)\mathbf{e}
+  \\&=\frac{
+    (\delta^2\overline{r}_p\mathbf{\overline{r}}-\alpha\delta\mathbf{\overline{r}})-(\alpha\delta\overline{r}_p-\delta\xi)\mathbf{e}}
+  {\delta^2(\overline{r}_p-\alpha/\delta)}
+  \\&=\frac{
+    (\delta\overline{r}_p-\alpha)\mathbf{\overline{r}}-(\alpha\overline{r}_p-\xi)\mathbf{e}}
+  {\delta(\overline{r}_p-\alpha/\delta)}
+\end{aligned} $$
+
+On the other hand:
+
+$$ \begin{aligned}
+  \beta_p&=\frac{\mathbf{V\omega_p}}{\omega_p'\mathbf{V}\omega_p}
+  \\&=\frac{1}{\omega_p'\mathbf{V}\omega_p}(\lambda_p\overline{\mathbf{r}}+\gamma \mathbf{e})
+  \\&=\frac{1}{\omega_p'\mathbf{V}\omega_p}(\frac{\mathbf{\xi e-\alpha  \overline{r}}}{\delta\xi-\alpha^2}+\frac{\mathbf{-\alpha e+\delta\overline{r}}}{\delta\xi-\alpha^2}\overline{r}_p)
+  \\&=\frac{1}{\omega_p'\mathbf{V}\omega_p}(\frac{ (\delta\overline{r}_p-\alpha)\mathbf{\overline{r}}-(\alpha\overline{r}_p-\xi)\mathbf{e}}{\Delta})
+\end{aligned} $$
+
+Then it's remain to show that
+
+$$ (\overline{r}_p-\overline{r}_q)\delta(\overline{r}_p-\alpha/\delta)=\omega'\mathbf{V}\omega\Delta $$
+
+It's clear since
+
+$$ \omega'\mathbf{V}\omega \Delta=\sigma_p^2\Delta=\frac{\Delta}{\delta}+\delta(\overline{r}_p-\frac{\alpha}{\delta})^2 $$
+
+and
+
+$$ \begin{aligned}
+  (\overline{r}_p-\overline{r}_q)\delta(\overline{r}_p-\alpha/\delta)&=
+  ((\overline{r}_p-\frac{\alpha}{\delta})+\frac{\delta\xi-\alpha^2}{\delta^2(\overline{r}_p-\alpha/\delta)})\delta(\overline{r}_p-\alpha/\delta)
+  \\&=\frac{\Delta}{\delta}+\delta(\overline{r}_p-\frac{\alpha}{\delta})^2. \blacksquare
+\end{aligned} $$
+
+## CAPM
+
+In capital market equilibrium, the market portfolio is tangecy portfolio $r_D=\overline{r}_m$, then 
+
+$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_m({\overline{r}_m-r_f}) $$
+
+where 
+
+$$ \beta_m=\begin{bmatrix}
+  \frac{\text{Cov}(r_1,r_m)}{\sigma^2_m}\\
+  \frac{\text{Cov}(r_2,r_m)}{\sigma^2_m}\\
+  \cdots\\
+  \frac{\text{Cov}(r_n,r_m)}{\sigma^2_m}\\
+\end{bmatrix} $$
+
+this equation is called **Sharpe-Lintner CAPM**. $\overline{r}_m-r_f$ is called **market risk premium** and $\frac{\overline{r}_m-r_f}{\sigma_m}$ is called **market sharpe ration**.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
