@@ -349,11 +349,11 @@ If the utility function of investor is negative exponential, then the optimal po
 
 $$ U(W)=-e^{-bW} $$
 
-and its initial wealth is $1$. Then
+and initial wealth is $1$, we assume the return is normally distributed. Then
 
 $$ W=r_p=(1-\mathbf{e'\omega})r_f+\omega'\mathbf{r}=r_f+\omega'\mathbf{r} $$
 
-To maximize its utility expection
+To maximize its utility expection 
 
 $$ \begin{aligned}
   E[U(W)]=E[U(r_p)]=E[-e^{-b(r_f+\omega'\mathbf{r})}]
