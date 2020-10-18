@@ -359,7 +359,7 @@ $$ \begin{aligned}
   E[U(W)]=E[U(r_p)]=E[-e^{-b(r_f+\omega'\mathbf{r})}]
 \end{aligned} $$
 
-where $\mathbf{r}={\mathbf{\tilde{r}}}-r_f\mathbf{e}\sim N(\mathbf{\overline{r}},\mathbf{V})$. It's sufficent to maximize
+where $\mathbf{r}={\mathbf{\tilde{r}}}-r_f\mathbf{e}\sim N(\mathbf{\overline{r}}-r_f\mathbf{e},\mathbf{V})$. It's sufficent to maximize
 
 $$ E[e^{(-b\omega)'\mathbf{r}}]=\exp\{(-b\omega)'E(\mathbf{{r}})+b^2\omega'\mathbf{V}\omega/2\} $$
 
