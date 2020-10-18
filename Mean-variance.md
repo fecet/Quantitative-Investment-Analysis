@@ -339,7 +339,7 @@ $$ \omega=\frac{\mathbf{V^-r}}{\mathbf{e'V^-r}}=\frac{\mathbf{V^-}(\overline{\ma
 
 **Remark**
 
-1. The maximun sharpe ration is the slope of frontier $\sqrt{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}$.
+1. The maximun sharpe ratio is the slope of frontier $\sqrt{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}$.
 
 2. $\omega_D$ is the only maxima on the frontier without risk-free asset. However, every portfolio on the frontier with a risk-free asset has the maximal sharpe ratio by one fund theorem($\omega^*=c\tilde{\omega}$) if $r_f>r_{mv}$. (Otherwise $\omega_D$ is on the lower straight line and become a minima).
 
@@ -462,7 +462,7 @@ $$ \beta_m=\begin{bmatrix}
   \frac{\text{Cov}(r_n,r_m)}{\sigma^2_m}\\
 \end{bmatrix} $$
 
-this equation is called **Sharpe-Lintner CAPM**. $r_m-r_f$ is called **market risk premium** and $\frac{r_m-r_f}{\sigma_m}$ is called **market sharpe ration**. Translate it from vector form, we get the **Security Market Line**:
+this equation is called **Sharpe-Lintner CAPM**. $r_m-r_f$ is called **market risk premium** and $\frac{r_m-r_f}{\sigma_m}$ is called **market sharpe ratio**. Translate it from vector form, we get the **Security Market Line**:
 
 $$ r_i-r_f=\frac{\text{Cov}(r_i,r_m)}{\sigma_m^2}(r_m-r_f)=\beta_{i,m}(r_m-r_f) 
 $$
