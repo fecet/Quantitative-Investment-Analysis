@@ -313,21 +313,20 @@ $$ \frac{\partial S_p}{\partial \omega}=0 $$
 
 Let $\mathbf{r}=\mathbf{\overline{r}}-r_f\mathbf{e}$
 
-$$\phi: w\mapsto \begin{bmatrix}\omega^T\mathbf{r} \\ \omega'\mathbf{V}\omega\end{bmatrix},\quad h(x,y):=\frac x {y^{1/2}}$$
+$$\phi: w\mapsto \begin{bmatrix}\omega'\mathbf{r} \\ \omega'\mathbf{V}\omega\end{bmatrix},\quad h(x,y):=\frac x {y^{1/2}}$$
 Then $S_p = h\circ\phi(w)$, and thus
 
 $$ \begin{aligned}
-  \frac{\partial S_p}{\partial \omega}&=\frac{\partial h}{\partial \phi}\frac{\partial \phi}{\partial \omega}\\&=
-  \nabla h(\phi(\omega))\nabla\phi(\omega)
+  \frac{\partial S_p}{\partial \omega}&=\frac{\partial h}{\partial \phi}\frac{\partial \phi}{\partial \omega}
   \\&=\begin{bmatrix}
     \frac{1}{( \omega'\mathbf{V}\omega)^{1/2}} &
     -\frac{\omega'\mathbf{r}}{2( \omega'\mathbf{V}\omega)^{3/2}}
   \end{bmatrix}
   \begin{bmatrix}
-    \mathbf{r}
-    \\2\mathbf{V}\omega
+    \mathbf{r'}
+    \\2\omega'\mathbf{V}
   \end{bmatrix}
-  \\&=\frac{ \omega'\mathbf{V}\omega \mathbf{r}-\omega'\mathbf{r}\mathbf{V}\omega}{( \omega'\mathbf{V}\omega)^{3/2}}
+  \\&=\frac{ \omega'\mathbf{V}\omega \mathbf{r'}-\omega'\mathbf{r}\omega'\mathbf{V}}{( \omega'\mathbf{V}\omega)^{3/2}}
 \end{aligned} $$
 
 Setting to zero, 
@@ -338,7 +337,41 @@ Note the scale of $\omega$ is independent to $S_p$. If we assume $\mathbf{e'\ome
 
 $$ \omega=\frac{\mathbf{V^-r}}{\mathbf{e'V^-r}}=\frac{\mathbf{V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}=\frac{\tilde{\omega}}{\mathbf{e}'\tilde{\omega}}=\omega_D $$
 
-$\omega_D$ is the only maxima on the frontier without risk-free asset. However, every portfolio on the frontier with a risk-free asset has the maximal sharpe ratio by one fund theorem($\omega^*=c\tilde{\omega}$) if $r_f>r_{mv}$. (Otherwise $\omega_D$ is on the lower straight line and become a minima).
+**Remark**
+
+1. The maximun sharpe ration is the slope of frontier $\sqrt{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}$.
+
+2. $\omega_D$ is the only maxima on the frontier without risk-free asset. However, every portfolio on the frontier with a risk-free asset has the maximal sharpe ratio by one fund theorem($\omega^*=c\tilde{\omega}$) if $r_f>r_{mv}$. (Otherwise $\omega_D$ is on the lower straight line and become a minima).
+
+## Indifference curve
+
+If the utility function of investor is negative exponential, then the optimal portfolio is still tangency portfolio. Suppose its utility is
+
+$$ U(W)=-e^{-bW} $$
+
+and its initial wealth is $1$. Then
+
+$$ W=r_p=(1-\mathbf{e'\omega})r_f+\omega'\mathbf{r}=r_f+\omega'\mathbf{r} $$
+
+To maximize its utility expection
+
+$$ \begin{aligned}
+  E[U(W)]=E[U(r_p)]=E[-e^{-b(r_f+\omega'\mathbf{r})}]
+\end{aligned} $$
+
+where $\mathbf{r}={\mathbf{\tilde{r}}}-r_f\mathbf{e}\sim N(\mathbf{\overline{r}},\mathbf{V})$. It's sufficent to maximize
+
+$$ E[e^{(-b\omega)'\mathbf{r}}]=\exp\{(-b\omega)'E(\mathbf{{r}})+b^2\omega'\mathbf{V}\omega/2\} $$
+
+then
+
+$$ \frac{\partial(-b\omega)'E(\mathbf{{r}})+b^2\omega'\mathbf{V}\omega/2  }{\partial\omega}=-bE(\mathbf{{r}})+b^2\mathbf{V\omega}=0 $$
+
+hence
+
+$$ \omega=\frac{\mathbf{V^-}E(\mathbf{{r}})}{b}=\frac{\mathbf{V^-}(\mathbf{\overline{r}}-r_f\mathbf{e})}{b}$$
+
+# CAPM
 
 ## Beta representation
 
@@ -416,9 +449,9 @@ $$ \begin{aligned}
 
 ## CAPM
 
-In capital market equilibrium, the market portfolio is tangecy portfolio $r_D=\overline{r}_m$, then 
+In capital market equilibrium, the market portfolio is tangecy portfolio $r_D={r}_m$, then 
 
-$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_m({\overline{r}_m-r_f}) $$
+$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_m({{r}_m-r_f}) $$
 
 where 
 
@@ -429,7 +462,29 @@ $$ \beta_m=\begin{bmatrix}
   \frac{\text{Cov}(r_n,r_m)}{\sigma^2_m}\\
 \end{bmatrix} $$
 
-this equation is called **Sharpe-Lintner CAPM**. $\overline{r}_m-r_f$ is called **market risk premium** and $\frac{\overline{r}_m-r_f}{\sigma_m}$ is called **market sharpe ration**.
+this equation is called **Sharpe-Lintner CAPM**. $r_m-r_f$ is called **market risk premium** and $\frac{r_m-r_f}{\sigma_m}$ is called **market sharpe ration**. Translate it from vector form, we get the **Security Market Line**:
+
+$$ r_i-r_f=\frac{\text{Cov}(r_i,r_m)}{\sigma_m^2}(r_m-r_f)=\beta_{i,m}(r_m-r_f) 
+$$
+
+## Variance decomposition
+
+Now consider both $r_i$ and $r_m$ is random variable, let $\epsilon$ be a random vector with zero expection and zero covariance with $r_i$ and $r_m$, then
+
+$$ {\mathbf{r}}-r_f\mathbf{e}=({{r}_m-r_f})\beta_m+\mathbf{\epsilon} $$
+
+thus
+
+$$ \begin{aligned}
+  \text{Var}(\mathbf{r})&=\text{Var}(\mathbf{r}-r_f\mathbf{e})
+  \\&=\text{Var}(\beta_m(r_m-r_f))+\text{Var}(\epsilon)
+  \\&=\text{Var}(r_m\beta_m)+\text{Var}(\epsilon)
+  \\&=\beta_m\beta_m'\sigma_m^2+\text{Var}(\epsilon)
+\end{aligned} $$
+
+
+
+
 
 
 
