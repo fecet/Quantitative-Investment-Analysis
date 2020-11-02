@@ -1,3 +1,12 @@
+---
+title: Factor model
+authors:
+  - name: Xie zejian
+    email: xiezej@gmail.com
+bibliography: references.bib
+output: rticles::arxiv_article
+---
+
 # CAPM
 
 ## Beta representation
@@ -6,15 +15,15 @@ Recall the tangency portfolio is $\omega_D=\frac{\mathbf{V^-}(\overline{\mathbf{
 
 $$ \overline{r}-r_f\mathbf{e}=\frac{1}{m}\mathbf{V}\omega_D $$
 
-Note $\text{Cov}(\mathbf{r},\omega'\mathbf{r})=\mathbf{V\omega}$ and
+Note $\cov(\mathbf{r},\omega'\mathbf{r})=\mathbf{V\omega}$ and
 
 $$ \sigma_D^2=\omega_D'\mathbf{V}\omega_D=m\omega'_D(\overline{\mathbf{r}}-r_f\mathbf{e})= mr_D-mr_f $$
 
 we have
 
-$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\frac{r_D-r_f}{\sigma_D^2}\text{Cov}(\mathbf{r},{r_D}) $$
+$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\frac{r_D-r_f}{\sigma_D^2}\cov(\mathbf{r},{r_D}) $$
 
-Denote $\frac{\text{Cov}(\mathbf{r},{r_D})}{\sigma_D^2}=\beta_D$, we have
+Denote $\frac{\cov(\mathbf{r},{r_D})}{\sigma_D^2}=\beta_D$, we have
 
 $$ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_D({r_D-r_f}) $$
 
@@ -71,7 +80,7 @@ and
 $$ \begin{aligned}
   (\overline{r}_p-\overline{r}_q)\delta(\overline{r}_p-\alpha/\delta)&=
   ((\overline{r}_p-\frac{\alpha}{\delta})+\frac{\delta\xi-\alpha^2}{\delta^2(\overline{r}_p-\alpha/\delta)})\delta(\overline{r}_p-\alpha/\delta)
-  \\&=\frac{\Delta}{\delta}+\delta(\overline{r}_p-\frac{\alpha}{\delta})^2. \blacksquare
+  \\&=\frac{\Delta}{\delta}+\delta(\overline{r}_p-\frac{\alpha}{\delta})^2
 \end{aligned} $$
 
 ## CAPM
@@ -83,10 +92,10 @@ $$ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_m({{r}_m-r_f}) $$
 where 
 
 $$ \beta_m=\begin{bmatrix}
-  \frac{\text{Cov}(r_1,r_m)}{\sigma^2_m}\\
-  \frac{\text{Cov}(r_2,r_m)}{\sigma^2_m}\\
+  \frac{\cov(r_1,r_m)}{\sigma^2_m}\\
+  \frac{\cov(r_2,r_m)}{\sigma^2_m}\\
   \cdots\\
-  \frac{\text{Cov}(r_n,r_m)}{\sigma^2_m}\\
+  \frac{\cov(r_n,r_m)}{\sigma^2_m}\\
 \end{bmatrix} $$
 
 this equation is called **Sharpe-Lintner CAPM**. $r_m-r_f$ is called **market risk premium** and $\frac{r_m-r_f}{\sigma_m}$ is called **market sharpe ratio**. Translate it from vector form, we get the **Security Market Line**:
@@ -115,7 +124,7 @@ is called **market model**, such $\alpha$ is called **Jensen's alpha**.
 
 Decomposition the variance as:
 
-$$ \text{Var}(r_i)=\overbrace{\underbrace{\beta_i\sigma_m^2}_{\text{Systematic risk}}+\underbrace{\text{Var}(\epsilon_i)}_{\text{Idiosyncratic risk}}}^{\text{total risk}} $$
+$$ \var(r_i)=\overbrace{\underbrace{\beta_i\sigma_m^2}_{\text{Systematic risk}}+\underbrace{\var(\epsilon_i)}_{\text{Idiosyncratic risk}}}^{\text{total risk}} $$
 
 The $R^2$ is just the proportion of systematic risk
 
@@ -146,16 +155,71 @@ MLE for $(\alpha,\beta,\Sigma)$ is found by maximize $\log L$, W.r.t. $\beta$, i
 
 $$ \sum_{t=1}^T (\mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)' \Sigma ^ { - 1 } ( \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e) $$
 
-The FOC:
+FOC with $\beta$ and recall $\mathbf{\frac{\partial x'Ax}{\partial x}=(A+A')x}$, $\mathbf{\frac{\partial f}{\partial X}=A'\frac{\partial f}{\partial AXB}B'}$
 
 $$ \begin{aligned}
   \frac{\partial \log L}{\partial \beta}&=\sum_{t=1}^T (\mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)' \Sigma ^ { - 1 } ( \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)
   \\&=\sum_{t=1}^T \frac{\partial (\mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)' \Sigma ^ { - 1 } ( \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)}{\partial \beta}
-  \\&=\sum_{t=1}^T\tr \frac{\partial (\mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)' \Sigma ^ { - 1 } ( \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)}{\partial \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e} \frac{\partial \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e}{\partial \beta}
+  \\&=\sum_{t=1}^T( \frac{\partial (\mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)' \Sigma ^ { - 1 } ( \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)}{\partial \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e} \frac{\partial \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e}{\partial \beta})
+  \\&=\sum_{t=1}^T( -2r_{m,t}^e\Sigma^{-1}(\mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)
+  )=0
 \end{aligned} $$
 
+since $\Sigma^{-1}$ is clearly invertible, $\sum_{t=1}^T r_{m,t}^e(\mathbf { r_t^e } -\hat{\alpha}-\hat{\beta} r_{m,t}^e)=\mathbf{0}$
 
+Similarly, FOC w.r.t $\alpha$, we get
 
+$$\sum_{t=1}^T \mathbf { r_t^e } -\hat{\alpha}-\hat{\beta} r_{m,t}^e=\mathbf{0}  $$
+
+By the truth $\mathbf{\frac{\partial |X|}{X}=|X|X'^-}$ and $\mathbf{\frac{\partial a'X^-b}{\partial X}=-X'^-ab'X'^-}$, we have
+
+$$ \frac{\partial \log L}{\partial \Sigma}=\sum_{t=1}^T (-\frac{\Sigma^-}{2}-+\frac{\Sigma^-}{2}(\mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)(\mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)'\Sigma^-) $$
+
+thus have
+
+$$ \hat{\Sigma}= \sum_{t=1}^T (\mathbf { r_t^e } -\hat{\alpha}-\hat{\beta} r_{m,t}^e)(\mathbf { r_t^e } -\hat{\alpha}-\hat{\beta} r_{m,t}^e)'/T$$
+
+Suppose
+
+$$\mathbf{r}= \begin{bmatrix}
+  \mathbf{r_1^e}'\\
+  \mathbf{r_2^e}'\\
+  \mathbf{r_3^e}'\\
+  \vdots\\
+  \mathbf{r_T^e}'
+\end{bmatrix},\mathbf{r_m}=\begin{bmatrix}
+  r_{m,1}^e\\
+  r_{m,2}^e\\
+  r_{m,3}^e\\
+  \vdots\\
+  r_{m,T}^e
+\end{bmatrix} $$
+
+Now 
+
+$$ \begin{aligned}
+  \mathbf{(r'-\hat{\alpha}e'-\hat{\beta}r_m')r_m=0}\\
+  \mathbf{(r'-\hat{\alpha}e'-\hat{\beta}r_m')e=0}
+\end{aligned} $$
+
+which leads to a linear equation
+
+$$ \begin{bmatrix}
+  \mathbf{e'r_m}&\mathbf{r_m'r_m}\\
+  \mathbf{e'e}&\mathbf{r_m'e}
+\end{bmatrix}\begin{bmatrix}
+  \alpha\\\beta
+\end{bmatrix}=\begin{bmatrix}
+  \mathbf{r'r_m}\\
+  \mathbf{r'e}
+\end{bmatrix} $$
+
+hence
+
+$$ \begin{cases}
+  \alpha=\mathbf{r'r_m(r'_me-e'e)}/(\mathbf{r_m'ee'r_m-e'er_m'r_m})\\
+  \beta=\mathbf{r'e(r_m'r_m-e'r_m)}
+\end{cases} $$
 
 
 
