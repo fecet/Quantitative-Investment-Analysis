@@ -135,15 +135,17 @@ since [Fraction of variance unexplained](https://en.wikipedia.org/wiki/Fraction_
 
 ### Testing CAPM
 
+
+
 Suppose we run time series regressions for each of the $n$ risky assets
 
 $$ \mathbf{r_t^e=\alpha}+{\beta r_{m,t}^e+\nu_t} $$
 
 where $\alpha,\mathbf{r_t^e},\beta,\nu_t$ are $n\times 1$ vector and  $r_{m,t}^e$ is scalar.
 
-By the discussion above, $\alpha=\mathbf{0}$ when CAPM holds. Assume $\{\nu_t\}_{t=1}^T$ i.i.d with $N(0,\Sigma)$, we have $\mathbf{r_t^e}\mid r_{m,t}^e\sim N(\alpha+\beta r_{m,t}^e,\Sigma)$. 
+By the discussion above, $\alpha=\mathbf{0}$ when CAPM holds. Assume $\{\nu_t\}_{t=1}^T$ i.i.d with $\mathcal{N}(0,\Sigma)$, we have $\mathbf{r_t^e}\mid r_{m,t}^e\sim \mathcal{N}(\alpha+\beta r_{m,t}^e,\Sigma)$. 
 
-Hence the p.d.f is
+<!-- The p.d.f for each $\mathbf{r_t^e}$ is
 
 $$f(\mathbf{r}_t^e)= ( 2 \pi ) ^ { - n / 2 } | \Sigma | ^ { - \frac { 1 } { 2 } } \exp \left\{ - \frac { 1 } { 2 } ( \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)' \Sigma ^ { - 1 } ( \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)  \right\} $$
 
@@ -151,7 +153,7 @@ By the indepedence, from $t=1$ to $t=T$, the joint p.d.f is $L=\prod_{t=1}^Tf(\m
 
 $$ \log L= \sum_{t=1}^T \log f(\mathbf{r_t^e})= -\frac{-n T}{2}\ln(2\pi)-\frac{T}{2}\ln |\Sigma|-\frac{1}{2}\sum_{t=1}^T (\mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)' \Sigma ^ { - 1 } ( \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e) $$
 
-MLE for $(\alpha,\beta,\Sigma)$ is found by maximize $\log L$, W.r.t. $\beta$, it's the same as minimize 
+MLE for $(\alpha,\beta,\Sigma)$ is found by maximize $\log L$, w.r.t. $\beta$, it's the same as minimize 
 
 $$ \sum_{t=1}^T (\mathbf { r_t^e } - \alpha-\beta r_{m,t}^e)' \Sigma ^ { - 1 } ( \mathbf { r_t^e } - \alpha-\beta r_{m,t}^e) $$
 
@@ -179,6 +181,8 @@ thus have
 
 $$ \hat{\Sigma}= \sum_{t=1}^T (\mathbf { r_t^e } -\hat{\alpha}-\hat{\beta} r_{m,t}^e)(\mathbf { r_t^e } -\hat{\alpha}-\hat{\beta} r_{m,t}^e)'/T$$
 
+#### Matrix Approch -->
+
 Suppose
 
 $$\mathbf{r}= \begin{bmatrix}
@@ -195,7 +199,31 @@ $$\mathbf{r}= \begin{bmatrix}
   r_{m,T}^e
 \end{bmatrix} $$
 
-Now 
+Now $\mathbf{r'}\sim \mathcal{MN}_{n\times T}(\mathbf{\alpha e'+\beta r_m',\Sigma,I})$, the p.d.f is [@wiki:mnt]
+
+$$ p(\mathbf{r'|\beta r_m',\Sigma,I})=\frac{\exp(-\frac{1}{2} \tr[\mathbf{(r'-\alpha e'-\beta r_m')'\Sigma^-(r'-\alpha e'-\beta r_m')}])}{(2\pi)^{nT/2}T^{n/2}|\mathbf{\Sigma}|^{T/2}} $$
+
+thus the log likelihood function is
+
+$$ \log L=-\frac{1}{2} \tr[\mathbf{(r'-\alpha e'-\beta r_m')'\Sigma^-(r'-\alpha e'-\beta r_m')}]-\frac{nT}{2}\log 2\pi-\frac{n}{2}\log T-\frac{T}{2}\log |\Sigma| $$
+
+
+FOC w.r.t $\alpha$, by chain rule[@petersen2012matrix]
+
+$$ \begin{aligned}
+  \partial \log L&=\tr\left(\frac{\partial \log L}{\partial \mathbf{(r'-\alpha e'-\beta r_m')}}'\partial\mathbf{(X-\alpha e'-\beta r_m')}\right)
+  \\&=\tr\left(\frac{\partial \log L}{\partial \mathbf{(r'-\alpha e'-\beta r_m')}}'\partial\alpha \mathbf{(-e')}\right)
+  \\&=\tr\left(\mathbf{(-e')}\frac{\partial \log L}{\partial \mathbf{(r'-\alpha e'-\beta r_m')}}'\partial\alpha\right)
+\end{aligned} $$
+
+hence
+
+$$ \begin{aligned}
+  \frac{\partial \log L}{\partial \alpha}&=-\frac{\partial \log L}{\partial \mathbf{(r'-\alpha e'-\beta r_m')}}\mathbf{e}
+  \\&=-(\Sigma^-+\Sigma'^-)\mathbf{(r'-\alpha e'-\beta r_m')}\mathbf{e}=0
+\end{aligned} $$
+
+Similarly, FOC w.r.t $\beta$ and combine those results:
 
 $$ \begin{aligned}
   \mathbf{(r'-\hat{\alpha}e'-\hat{\beta}r_m')r_m=0}\\
@@ -208,41 +236,72 @@ $$ \begin{bmatrix}
   \mathbf{e'r_m}&\mathbf{r_m'r_m}\\
   \mathbf{e'e}&\mathbf{r_m'e}
 \end{bmatrix}\begin{bmatrix}
-  \alpha\\\beta
+  \hat{\alpha}\\\hat{\beta}
 \end{bmatrix}=\begin{bmatrix}
   \mathbf{r'r_m}\\
   \mathbf{r'e}
 \end{bmatrix} $$
 
-hence
+Similarly to out deduction for mean-variance mdoel, let $a=\mathbf{r_m'r_m},b=\mathbf{e'e}=T$ and $c=\mathbf{e'r_m}$($c^2< ab$), hence
 
 $$ \begin{cases}
-  \alpha=\mathbf{r'r_m(r'_me-e'e)}/(\mathbf{r_m'ee'r_m-e'er_m'r_m})\\
-  \beta=\mathbf{r'e(r_m'r_m-e'r_m)}
+  \hat{\alpha}=c\mathbf{r'r_m}-a\mathbf{r'e}/(c^2-ab)\\
+  \hat{\beta}=-b\mathbf{r'r_m}+c\mathbf{r'e}/(c^2-ab)
 \end{cases} $$
 
 
 
 
 
+By assumption $\mathbf{r'}\sim \mathcal{MN}_{n\times T}(\mathbf{\beta r_m',\Sigma,I})$, and $\alpha=\mathbf{r'}(c\mathbf{r_m}-a\mathbf{e})/(c^2-ab)$
+
+By transformation of matrix normal distribution[@wiki:mnt]
+
+$$\frac{ (c\mathbf{r_m}-a\mathbf{e})'(c\mathbf{r_m}-a\mathbf{e})}{(c^2-ab)^2}=\frac{c^2a-2ac^2+a^2b}{(c^2-ab)^2}=\frac{a}{ab-c^2} $$
+
+we have
+
+$$ \hat{\alpha}\sim \mathcal{MN}(\mathbf{0,\Sigma},\frac{a}{ab-c^2}) $$
+
+which degenerated to $\mathcal{N}(0,\mathbf{\frac{a}{ab-c^2}\Sigma})$ since $\Sigma \otimes \frac{a}{ab-c^2}=\frac{a}{ab-c^2}\Sigma$.[@wiki:mnt] For the same reason, $\hat{\beta}\sim\mathcal{N}(\mathbf{\beta},\frac{b}{ab-c^2}\Sigma)$
 
 
+FOC w.r.t $\Sigma$[@petersen2012matrix]:
 
+$$ \frac{\partial \log L}{\partial \Sigma}=\frac{1}{2}(\Sigma^-\mathbf{(r'-\alpha e'-\beta r_m')}\mathbf{(r'-\alpha e'-\beta r_m')}'\Sigma^-)'-\frac{T}{2}\Sigma'^-=0 $$
 
+hence
 
+$$ \hat{\Sigma}= \mathbf{(r'-\hat{\alpha} e'-\hat{\beta} r_m')}\mathbf{(r'-\hat{\alpha} e'-\hat{\beta} r_m')}'/T$$
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+Where
+
+$$ \mathbf{(r'-\hat{\alpha} e'-\hat{\beta} r_m')}=\mathbf{r'}(\mathbf{I}-\frac{c\mathbf{r_me'}-a\mathbf{ee'}-b\mathbf{r_mr_m'}+c\mathbf{er_m'}}{c^2-ab}) $$
+
+Easy to verify $\frac{c\mathbf{r_me'}-a\mathbf{ee'}-b\mathbf{r_mr_m'}+c\mathbf{er_m'}}{c^2-ab}$ is symmetric and idempotent, thus
+
+$$ \begin{aligned}
+  \rank(\mathbf{I}-\frac{c\mathbf{r_me'}-a\mathbf{ee'}-b\mathbf{r_mr_m'}+c\mathbf{er_m'}}{c^2-ab})&=\tr(\mathbf{I}-\frac{c\mathbf{r_me'}-a\mathbf{ee'}-b\mathbf{r_mr_m'}+c\mathbf{er_m'}}{c^2-ab})
+  \\&=T-\frac{2c^2-2ab}{c^2-ab}
+  \\&=T-2
+\end{aligned} $$
+
+By following lemma:
+
+> Suppose symmetric matrix $p\times p$ $\mathbf{A}$. It's idempotent of rank $s$ iff there exist a $p\times s$ $\mathbf{P}$  $\ni \mathbf{PP'=A}$ and $\mathbf{P'P=I}$.
+
+**Proof** Sufficiency is trivial. For necessity, since $\mathbf{A}$ is symmetric and idempotent matrix, it can be spectral decompostioned by $\mathbf{A=Q\Lambda Q'}$. Where the diagonal of $\mathbf{\Lambda}$  is $s$ 1 and $p-s$ 0. Thus
+
+$$ \mathbf{A=Q\Lambda Q'}= \left( \begin{array} { l l } \mathbf{P_1} & \mathbf{P_2} \end{array} \right) \left( \begin{array} { l l } \mathbf { I } _ { s } & 0 \\ 0 & 0 \end{array} \right) \left( \begin{array} { l } \mathbf { P } _ { 1 } ^ { \prime } \\ \mathbf { P } _ { 2 } ^ { \prime } \end{array} \right) = \mathbf { P } _ { 1 } \mathbf { P } _ { 1 } ^ { \prime } $$
+
+Note 
+
+$$ \mathbf { I } _ { p } = \mathbf { Q } ^ { \prime } \mathbf { Q } = \left( \begin{array} { c } \mathbf { P } _ { 1 } ^ { \prime } \\ \mathbf { P } _ { 2 } ^ { \prime } \end{array} \right) \left( \begin{array} { c c } \mathbf { P } _ { 1 } & \mathbf { P } _ { 2 } \end{array} \right) = \left( \begin{array} { c c } \mathbf { P } _ { 1 } ^ { \prime } \mathbf { P } _ { 1 } & \mathbf { P } _ { 1 } ^ { \prime } \mathbf { P } _ { 2 } \\ \mathbf { P } _ { 2 } ^ { \prime } \mathbf { P } _ { 1 } & \mathbf { P } _ { 2 } ^ { \prime } \mathbf { P } _ { 2 } \end{array} \right)= \left( \begin{array} { c c } \mathbf { P } _ { 1 } ^ { \prime } \mathbf { P } _ { 1 } & \mathbf{0}\\ \mathbf{0} & \mathbf { P } _ { 2 } ^ { \prime } \mathbf { P } _ { 2 } \end{array} \right)$$
+
+hence$\mathbf{P_1'P_1=I_s}.\blacksquare$
+
+We may find $\mathbf{r'P}\sim \mathcal{MN}_{n\times(T-2)}(\mathbf{0},\Sigma,\mathbf{I})$. Where $\ep[\mathbf{r'P}]=\ep[\mathbf{r'PP'P}]=\ep[\mathbf{r'AP}]=\mathbf{0}$ and thus [@wiki:wst]
+
+$$ T\hat{\Sigma}=\mathbf{r'Ar}=\mathbf{r'PP'r}=\mathbf{r'P(r'P)'}\sim W_n(T-2,\Sigma) $$
+
+\newpage

@@ -8,8 +8,3 @@
 # log 不需要提交的任意包含后缀名为log的文件
 *.log
 ​
-# Package Files 不需要提交的任意包含后缀名为jar的文件
-*.jar
-Ch2/Facror model.rmd
-Ch2/Facror model.rmd
-Ch2/Facror model.rmd
