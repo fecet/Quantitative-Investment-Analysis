@@ -137,13 +137,7 @@ since [Fraction of variance unexplained](https://en.wikipedia.org/wiki/Fraction_
 
 
 
-Suppose we run time series regressions for each of the $n$ risky assets
 
-$$ \mathbf{r_t^e=\alpha}+{\beta r_{m,t}^e+\nu_t} $$
-
-where $\alpha,\mathbf{r_t^e},\beta,\nu_t$ are $n\times 1$ vector and  $r_{m,t}^e$ is scalar.
-
-By the discussion above, $\alpha=\mathbf{0}$ when CAPM holds. Assume $\{\nu_t\}_{t=1}^T$ i.i.d with $\mathcal{N}(0,\Sigma)$, we have $\mathbf{r_t^e}\mid r_{m,t}^e\sim \mathcal{N}(\alpha+\beta r_{m,t}^e,\Sigma)$. 
 
 <!-- The p.d.f for each $\mathbf{r_t^e}$ is
 
