@@ -17,17 +17,17 @@ $$ \overline{r}-r_f\mathbf{e}=\frac{1}{m}\mathbf{V}\omega_D $$
 
 Note $\cov(\mathbf{r},\omega'\mathbf{r})=\mathbf{V\omega}$ and
 
-$$ \sigma_D^2=\omega_D'\mathbf{V}\omega_D=m\omega'_D(\overline{\mathbf{r}}-r_f\mathbf{e})= mr_D-mr_f $$
+$$ \sigma_D^2=\omega_D'\mathbf{V}\omega_D=m\omega'_D(\overline{\mathbf{r}}-r_f\mathbf{e})= m\overline{r}_D-mr_f $$
 
 we have
 
-$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\frac{r_D-r_f}{\sigma_D^2}\cov(\mathbf{r},{r_D}) $$
+$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\frac{\overline{r}_D-r_f}{\sigma_D^2}\cov(\mathbf{r},{r_D}) $$
 
-Denote $\frac{\cov(\mathbf{r},{r_D})}{\sigma_D^2}=\beta_D$, we have
+Denote $\frac{\cov(\mathbf{r},r_D)}{\sigma_D^2}=\beta_D$, we have
 
-$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_D({r_D-r_f}) $$
+$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_D({\overline{r}_D-r_f}) $$
 
-Similar results also holds for any portfolio $\overline{r}_p$ in the MVF:
+Similar results also holds for any portfolio $\overline{r}_p$ and the zero covariance portfolio $\overline{r}_q$ in the MVF:
 
 $$ \overline{\mathbf{r}}-\overline{r}_q\mathbf{e}=\beta_p(\overline{r}_p-\overline{r}_q) $$
 
@@ -85,23 +85,23 @@ $$ \begin{aligned}
 
 ## CAPM
 
-In capital market equilibrium, the market portfolio is tangecy portfolio $r_D={r}_m$, then 
+In capital market equilibrium, the market portfolio is tangecy portfolio $\overline{r}_D={r}_m$, then
 
-$$ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_m({{r}_m-r_f}) $$
+$$ \bm{\mathbf{\overline{r}-\mathit{r_f}e}}=\bm{\mathbf{\beta_m}}(\overline{r}_m-r_f) $$
 
 where 
 
 $$ \beta_m=\begin{bmatrix}
-  \frac{\cov(r_1,r_m)}{\sigma^2_m}\\
-  \frac{\cov(r_2,r_m)}{\sigma^2_m}\\
+  \frac{\cov(r_1,\overline{r}_m)}{\sigma^2_m}\\
+  \frac{\cov(r_2,\overline{r}_m)}{\sigma^2_m}\\
   \cdots\\
-  \frac{\cov(r_n,r_m)}{\sigma^2_m}\\
+  \frac{\cov(r_n,\overline{r}_m)}{\sigma^2_m}\\
 \end{bmatrix} $$
 
-this equation is called **Sharpe-Lintner CAPM**. $r_m-r_f$ is called **market risk premium** and $\frac{r_m-r_f}{\sigma_m}$ is called **market sharpe ratio**. Translate it from vector form, we get the **Security Market Line**:
+this equation is called **Sharpe-Lintner CAPM**. $\overline{r}_m-r_f$ is called **market risk premium** and $\frac{\overline{r}_m-r_f}{\sigma_m}$ is called **market sharpe ratio**. Translate it from vector form, we get the **Security Market Line**:
 
 $$ 
-r_i-r_f=\beta_{i,m}(r_m-r_f) 
+r_i-r_f=\beta_{i,m}(\overline{r}_m-r_f) 
 $$
 
 ### Realized return
