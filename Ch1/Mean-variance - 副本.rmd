@@ -1,11 +1,10 @@
 ---
-title: "Mean-variance portfolio notes"
-author: Xie Zejian
-date: '`r format(Sys.Date(), "%B %d,%Y")`'
-output:
-  pdf_document:
-    toc: true
-    toc_depth: 2
+title: Mean-Variance
+authors:
+  - name: Xie zejian
+    email: xiezej@gmail.com
+bibliography: references.bib
+output: rticles::arxiv_article
 ---
 
 # Risky Assets
@@ -105,9 +104,9 @@ $$\omega_3=x\omega_1+(1-x)\omega_2= x({a+br_1})+(1-x)({a+br_2})={a+br_3} $$
 
 > Any convex combination of efficient frontier portfolios will be an efficient frontier portfolio.
 
-**Proof** A portofolio $\omega$ is on the efficient froniter iff(if and only if)  it's return $\overline{r}_p\ge r_{mv}$ and recall $\omega=a+b \overline{r}_p$, thus there is a bijection between $\omega_i$ and $r_i$. Suppose the return of $\omega_i$ is $r_i$, 
+**Proof** A portofolio $\omega$ is on the efficient froniter iff it's return $\overline{r}_p\ge r_{mv}$ and with the  form $\omega=a+b \overline{r}_p$, thus there is a bijection between $\omega_i$ and $r_i$. Suppose the return of $\omega_i$ is $r_i$, 
 
-$$\omega=\begin{bmatrix}
+$$ \bm{\mathbf{\Omega}}=\begin{bmatrix}
     \omega_1&\cdots&\omega_n
 \end{bmatrix},\mathbf{c}=\begin{bmatrix}
     c_1\\
@@ -116,9 +115,9 @@ $$\omega=\begin{bmatrix}
 
 Firstly, verify the convex combination is a legal portfolio:
 
-$$ \mathbf{e'(\omega c)=(e'\omega)c=e'c}=1 $$
+$$ \bm{\mathbf{e'(\Omega c)=(e'\Omega)c=e'c}=1} $$
 
-since $\forall \omega_i \mathbf{e'\omega_i}=1, \mathbf{e'c}=1$. Then it's sufficient to show that $\mathbf{c'r} \ge r_{mv}$. It's clearly since
+since $\forall \omega_i \mathbf{e'\omega_i}=1, \mathbf{e'c}=1$. By above theorem, the combaination is on the MVF. Then it's sufficient to show that $\mathbf{c'r} \ge r_{mv}$. It's clearly since
 
 $$ \mathbf{c'r}=\sum c_i\omega_i\ge \sum c_i \min(r_i)=\min(r_i)\sum c_i=\min(r_i)\ge r_{mv} $$
 
@@ -147,16 +146,15 @@ Moreover, if
 
 Thus we have
 
-> The covariance of the return on the global minimum variance (GMV) portfolio
-and that on any portfolio (not necessary on the frontier) is always equal to $\sigma_{mv}^2=\frac{1}{\delta}$.
+> The covariance of the return on the global minimum variance (GMV) portfolio and that on any portfolio (not necessary on the frontier) is always equal to $\sigma_{mv}^2=\frac{1}{\delta}$.
 
-Apply this we get $\text{Cov}(\mathbf{r_p-r_{mv},r_{mv}})=\text{Cov}(\mathbf{r_p,r_{mv}})-\sigma_{mv}^2=0$ immediately. We call $\epsilon=\mathbf{r_p-r_{mv}}$ **excess return**.
+> The covariance of the return on a frontier portfolio $q$ and that on any portfolio $p$ (not on the frontier) with the same expected return as $q$ is always equal to the variance of the frontier portfolio $q$. Formally $E[\mathbf{r_p}]=E[\mathbf{r_q}]\implies \text{Cov}(\mathbf{r_p,r_q})=\sigma_q^2$.
 
-> The covariance of the return on a frontier portfolio $q$ and that on any portfolio
-$p$ (not on the frontier) with the same expected return as $q$ is always equal to
-the variance of the frontier portfolio $q$. Formally $E[\mathbf{r_p}]=E[\mathbf{r_q}]\implies \text{Cov}(\mathbf{r_p,r_q})=\sigma_q^2$.
+Now suppose $r_p$ is any portfolio and $r_q$ on the froniter with $\mathop{\text{E}}[r_q]=\mathop{\text{E}}[r_p]$. By first assertion, we decompose $r_p=r_{mv}+\epsilon$
 
-It implies that we can decompose $\mathbf{r_p=r_q+\epsilon_p}$ where $E[\epsilon]=\text{Cov}(\epsilon_p,\mathbf{r_q})=0$
+$$\text{Cov}(\mathbf{r_p-r_{mv},r_{mv}})=\text{Cov}(\mathbf{r_p,r_{mv}})-\sigma_{mv}^2=0$$
+
+We call $\epsilon=\mathbf{r_p-r_{mv}}$ **excess return**. And the second implies that we can decompose $\mathbf{r_p=r_q+\epsilon_p}$ where $E[\epsilon]=\text{Cov}(\epsilon_p,\mathbf{r_q})=0$
 
 Rewrite the excess return as $\epsilon=b_p \mathbf{r^*}$, then $\mathbf{r_p}$ can be decomposed into
 
@@ -164,9 +162,7 @@ $$ \mathbf{r_p=r_{mv}}+b_p\mathbf{r^*}+\epsilon_p $$
 
 where $\mathbf{r}^*$ is an excess return and $b_p\in \mathbb{R}$.Note $\text{Cov}(\mathbf{r_{mv},\epsilon_p})=\text{Cov}(\mathbf{r_{mv},r_p-r_q})=0$ then $\text{Cov}(\mathbf{r}^*,\epsilon_p)$ is also zero. Hence
 
-$$ \text{Var}(\mathbf{r_p})=\overbrace{\underbrace{\sigma_{mv}^2}_{\text{unavoidable risk}}+b_p^2\text{Var}(\mathbf{r^*})}^{\text{systematic risk}}+\underbrace{\text{Var}(\epsilon_p)}_{\text{idiot risk}} $$
-
-One can reduce $\epsilon_p$ to zero to avoid idiot risk and get a frontier portfolio.
+$$ \text{Var}(\mathbf{r_p})=\overbrace{\underbrace{\sigma_{mv}^2}_{\text{unavoidable risk}}+b_p^2\text{Var}(\mathbf{r^*})}^{\text{systematic risk}}+\underbrace{\text{Var}(\epsilon_p)}_{\text{idio risk}} $$
 
 ## Zero covariance
 
@@ -206,7 +202,7 @@ Substituted in $a+b\overline{r}_p$:
 
 $$ \omega_D=-\frac{\mathbf{V^-e}}{\delta}+\frac{\mathbf{V^-\overline{r}}}{\alpha}+(a+b)\frac{\alpha}{\delta}=-\frac{\mathbf{V^-e}}{\delta}+\frac{\mathbf{V^-\overline{r}}}{\alpha}+\frac{\mathbf{V^-e}}{\delta}=\frac{\mathbf{V^-\overline{r}}}{\alpha}$$
 
-That is the tangency portofolio. If $\overline{r}_q>0$, $\overline{r}_q$ can be interpreted as risk-free asset return in [next chapter](#beta-representation)
+That is the tangency portofolio. If $\overline{r}_q>0$, $\overline{r}_q$ can be interpreted as risk-free asset return.
 
 # Risk-free asset
 
@@ -333,7 +329,12 @@ $$ \omega=\frac{\mathbf{V^-r}}{\mathbf{e'V^-r}}=\frac{\mathbf{V^-}(\overline{\ma
 
 **Remark**
 
-1. The maximun sharpe ratio is the slope of frontier $\sqrt{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}$.
+1. 
+   The maximun sharpe ratio is the slope of frontier $\sqrt{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}$. One can check that
+
+   $$ \sqrt{(\mathbf{\overline{r}}-r_f\mathbf{e})'\mathbf{V}^-(\mathbf{\overline{r}}-r_f\mathbf{e})}=\frac{\omega'(\mathbf{\overline{r}}-r_f\mathbf{e})}{\sqrt{\omega'\mathbf{V}\omega}}$$
+
+   when $\bm{\mathbf{\omega}}=\bm{\mathbf{\mathbf{V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}}$.
 
 2. $\omega_D$ is the only maxima on the frontier without risk-free asset. However, every portfolio on the frontier with a risk-free asset has the maximal sharpe ratio by one fund theorem($\omega^*=c\tilde{\omega}$) if $r_f>r_{mv}$. (Otherwise $\omega_D$ is on the lower straight line and become a minima).
 
@@ -366,4 +367,3 @@ hence
 $$ \omega=\frac{\mathbf{V^-}E(\mathbf{{r}})}{b}=\frac{\mathbf{V^-}(\mathbf{\overline{r}}-r_f\mathbf{e})}{b}$$
 
 
-# ss

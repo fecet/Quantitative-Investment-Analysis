@@ -29,6 +29,7 @@
   \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
   {\par}
 
+
 \begin{document}
 \maketitle
 
@@ -41,10 +42,10 @@
 
 
 \hypertarget{capm}{%
-\section{CAPM}\label{capm}}
+\subsection{CAPM}\label{capm}}
 
 \hypertarget{beta-representation}{%
-\subsection{Beta representation}\label{beta-representation}}
+\subsubsection{Beta representation}\label{beta-representation}}
 
 Recall the tangency portfolio is
 \(\omega_D=\frac{\mathbf{V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}\).
@@ -57,18 +58,18 @@ then we have
 
 Note \(\cov(\mathbf{r},\omega'\mathbf{r})=\mathbf{V\omega}\) and
 
-\[ \sigma_D^2=\omega_D'\mathbf{V}\omega_D=m\omega'_D(\overline{\mathbf{r}}-r_f\mathbf{e})= mr_D-mr_f \]
+\[ \sigma_D^2=\omega_D'\mathbf{V}\omega_D=m\omega'_D(\overline{\mathbf{r}}-r_f\mathbf{e})= m\overline{r}_D-mr_f \]
 
 we have
 
-\[ \overline{\mathbf{r}}-r_f\mathbf{e}=\frac{r_D-r_f}{\sigma_D^2}\cov(\mathbf{r},{r_D}) \]
+\[ \overline{\mathbf{r}}-r_f\mathbf{e}=\frac{\overline{r}_D-r_f}{\sigma_D^2}\cov(\mathbf{r},{r_D}) \]
 
-Denote \(\frac{\cov(\mathbf{r},{r_D})}{\sigma_D^2}=\beta_D\), we have
+Denote \(\frac{\cov(\mathbf{r},r_D)}{\sigma_D^2}=\beta_D\), we have
 
-\[ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_D({r_D-r_f}) \]
+\[ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_D({\overline{r}_D-r_f}) \]
 
-Similar results also holds for any portfolio \(\overline{r}_p\) in the
-MVF:
+Similar results also holds for any portfolio \(\overline{r}_p\) and the
+zero covariance portfolio \(\overline{r}_q\) in the MVF:
 
 \[ \overline{\mathbf{r}}-\overline{r}_q\mathbf{e}=\beta_p(\overline{r}_p-\overline{r}_q) \]
 
@@ -128,29 +129,30 @@ and
 \end{aligned} \]
 
 \hypertarget{capm-1}{%
-\subsection{CAPM}\label{capm-1}}
+\subsubsection{CAPM}\label{capm-1}}
 
 In capital market equilibrium, the market portfolio is tangecy portfolio
-\(r_D={r}_m\), then
+\(\overline{r}_D={r}_m\), then
 
-\[ \overline{\mathbf{r}}-r_f\mathbf{e}=\beta_m({{r}_m-r_f}) \]
+\[ \bm{\mathbf{\overline{r}-\mathit{r_f}e}}=\bm{\mathbf{\beta_m}}(\overline{r}_m-r_f) \]
 
 where
 
 \[ \beta_m=\begin{bmatrix}
-  \frac{\cov(r_1,r_m)}{\sigma^2_m}\\
-  \frac{\cov(r_2,r_m)}{\sigma^2_m}\\
+  \frac{\cov(r_1,\overline{r}_m)}{\sigma^2_m}\\
+  \frac{\cov(r_2,\overline{r}_m)}{\sigma^2_m}\\
   \cdots\\
-  \frac{\cov(r_n,r_m)}{\sigma^2_m}\\
+  \frac{\cov(r_n,\overline{r}_m)}{\sigma^2_m}\\
 \end{bmatrix} \]
 
-this equation is called \textbf{Sharpe-Lintner CAPM}. \(r_m-r_f\) is
-called \textbf{market risk premium} and \(\frac{r_m-r_f}{\sigma_m}\) is
-called \textbf{market sharpe ratio}. Translate it from vector form, we
-get the \textbf{Security Market Line}:
+this equation is called \textbf{Sharpe-Lintner CAPM}.
+\(\overline{r}_m-r_f\) is called \textbf{market risk premium} and
+\(\frac{\overline{r}_m-r_f}{\sigma_m}\) is called \textbf{market sharpe
+ratio}. Translate it from vector form, we get the \textbf{Security
+Market Line}:
 
 \[ 
-r_i-r_f=\beta_{i,m}(r_m-r_f) 
+r_i-r_f=\beta_{i,m}(\overline{r}_m-r_f) 
 \]
 
 \hypertarget{realized-return}{%
@@ -192,175 +194,115 @@ of variance unexplained}.
 \hypertarget{testing-capm}{%
 \subsubsection{Testing CAPM}\label{testing-capm}}
 
-Suppose we run time series regressions for each of the \(n\) risky
-assets
+see \url{GRS.pdf}
 
-\[ \mathbf{r_t^e=\alpha}+{\beta r_{m,t}^e+\nu_t} \]
+\hypertarget{multi-factor-model}{%
+\subsection{Multi-factor model}\label{multi-factor-model}}
 
-where \(\alpha,\mathbf{r_t^e},\beta,\nu_t\) are \(n\times 1\) vector and
-\(r_{m,t}^e\) is scalar.
+\hypertarget{apt}{%
+\subsubsection{APT}\label{apt}}
 
-By the discussion above, \(\alpha=\mathbf{0}\) when CAPM holds. Assume
-\(\{\nu_t\}_{t=1}^T\) i.i.d with \(\mathcal{N}(0,\Sigma)\), we have
-\(\mathbf{r_t^e}\mid r_{m,t}^e\sim \mathcal{N}(\alpha+\beta r_{m,t}^e,\Sigma)\).
+Recall in the CAPM
 
-Suppose
+\[ \bm{\mathbf{r_t^e=\alpha}}+{\beta r_{m,t}^e+\nu_t} \]
 
-\[\mathbf{r}= \begin{bmatrix}
-  \mathbf{r_1^e}'\\
-  \mathbf{r_2^e}'\\
-  \mathbf{r_3^e}'\\
-  \vdots\\
-  \mathbf{r_T^e}'
-\end{bmatrix},\mathbf{r_m}=\begin{bmatrix}
-  r_{m,1}^e\\
-  r_{m,2}^e\\
-  r_{m,3}^e\\
-  \vdots\\
-  r_{m,T}^e
-\end{bmatrix} \]
+Suppose now there is multi-factor with \(k\) risk factor and
 
-Now
-\(\mathbf{r'}\sim \mathcal{MN}_{n\times T}(\mathbf{\alpha e'+\beta r_m',\Sigma,I})\),
-the p.d.f is (Wikipedia contributors 2019)
+\[ \bm{\mathbf{r_t=\alpha+Bf_t+\epsilon_t}} \]
 
-\[ p(\mathbf{r'|\beta r_m',\Sigma,I})=\frac{\exp(-\frac{1}{2} \tr[\mathbf{(r'-\alpha e'-\beta r_m')'\Sigma^-(r'-\alpha e'-\beta r_m')}])}{(2\pi)^{nT/2}T^{n/2}|\mathbf{\Sigma}|^{T/2}} \]
+Where \(\bm{\mathbf{r_t,\epsilon_t}}\) is \(n\) vector while
+\(\bm{\mathbf{f_t}}\) is \(k\) vector and \(\bm{\mathbf{B}}\) is
+\(n\times k\) matrix.
 
-thus the log likelihood function is
+Taking expectation:
 
-\[ \log L=-\frac{1}{2} \tr[\mathbf{(r'-\alpha e'-\beta r_m')'\Sigma^-(r'-\alpha e'-\beta r_m')}]-\frac{nT}{2}\log 2\pi-\frac{n}{2}\log T-\frac{T}{2}\log |\Sigma| \]
+\[ \bm{\mathbf{r_t=\mathop{\text{E}}[r]+B(f_t-\mathop{\text{E}}[f_t])+\epsilon_t}} \]
 
-FOC w.r.t \(\alpha\), by chain rule(Petersen and Pedersen 2012)
+Note CAPM is just special case of APT when \(k=1\) and
+\(\bm{\mathbf{f_t}}=r_{m,t}\), which is the only factor affecting
+realized return. Thta is
 
-\[ \begin{aligned}
-  \partial \log L&=\tr\left(\frac{\partial \log L}{\partial \mathbf{(r'-\alpha e'-\beta r_m')}}'\partial\mathbf{(X-\alpha e'-\beta r_m')}\right)
-  \\&=\tr\left(\frac{\partial \log L}{\partial \mathbf{(r'-\alpha e'-\beta r_m')}}'\partial\alpha \mathbf{(-e')}\right)
-  \\&=\tr\left(\mathbf{(-e')}\frac{\partial \log L}{\partial \mathbf{(r'-\alpha e'-\beta r_m')}}'\partial\alpha\right)
-\end{aligned} \]
+\[ \bm{\mathbf{r_t=\mathit{r_f}e+\beta \mathop{\text{E}}[\mathit{r_{m}-r_f}]+\beta(\mathit{r_{m,t}}-\mathop{\text{E}}[\mathit{r_{m,t}}])+\epsilon_t}} \]
 
-hence
+Assume there is non-arbitrage, that is, if one invest \(0\) and take no
+risk, then the expected return is \(0\). Formally, as \(n\to \infty\),
 
-\[ \begin{aligned}
-  \frac{\partial \log L}{\partial \alpha}&=-\frac{\partial \log L}{\partial \mathbf{(r'-\alpha e'-\beta r_m')}}\mathbf{e}
-  \\&=-(\Sigma^-+\Sigma'^-)\mathbf{(r'-\alpha e'-\beta r_m')}\mathbf{e}=0
-\end{aligned} \]
+\[ \bm{\mathbf{\omega'\begin{bmatrix}
+  \bm{\mathbf{e}}&\bm{\mathbf{B}}
+\end{bmatrix}=0\implies\omega'\mathop{\text{E}}[r]=0}} \]
 
-Similarly, FOC w.r.t \(\beta\) and combine those results:
-
-\[ \begin{aligned}
-  \mathbf{(r'-\hat{\alpha}e'-\hat{\beta}r_m')r_m=0}\\
-  \mathbf{(r'-\hat{\alpha}e'-\hat{\beta}r_m')e=0}
-\end{aligned} \]
-
-which leads to a linear equation
+by Farkas lemma(Farkas 1902), that implies
 
 \[ \begin{bmatrix}
-  \mathbf{e'r_m}&\mathbf{r_m'r_m}\\
-  \mathbf{e'e}&\mathbf{r_m'e}
+  \bm{\mathbf{e}}&\bm{\mathbf{B}}
 \end{bmatrix}\begin{bmatrix}
-  \hat{\alpha}\\\hat{\beta}
-\end{bmatrix}=\begin{bmatrix}
-  \mathbf{r'r_m}\\
-  \mathbf{r'e}
-\end{bmatrix} \]
+  \lambda_0\\\bm{\mathbf{\lambda}}
+\end{bmatrix}=\mathop{\text{E}}[\bm{\mathbf{r}}] \]
 
-Similarly to out deduction for mean-variance mdoel, let
-\(a=\mathbf{r_m'r_m},b=\mathbf{e'e}=T\) and
-\(c=\mathbf{e'r_m}\)(\(c^2< ab\)), hence
+for some \(\bm{\mathbf{\lambda\ge 0}}\). Under CAPM, \(\lambda_0=r_f\)
+and \(\mathop{\text{E}}[\mathit{r_{m}-r_f}]=\lambda\) clearly. If one
+take no risk, that is \(\bm{\mathbf{B=0}}\), s(he) get a \(\lambda_0\)
+return, that implies \(\lambda_0=r_f\) immediately.
 
-\[ \begin{cases}
-  \hat{\alpha}=c\mathbf{r'r_m}-a\mathbf{r'e}/(c^2-ab)\\
-  \hat{\beta}=-b\mathbf{r'r_m}+c\mathbf{r'e}/(c^2-ab)
-\end{cases} \]
+\hypertarget{when-factors-are-returns}{%
+\paragraph{When factors are returns}\label{when-factors-are-returns}}
 
-By assumption
-\(\mathbf{r'}\sim \mathcal{MN}_{n\times T}(\mathbf{\beta r_m',\Sigma,I})\),
-and \(\alpha=\mathbf{r'}(c\mathbf{r_m}-a\mathbf{e})/(c^2-ab)\)
+When \(\bm{\mathbf{f_t}}\) is \(\bm{\mathbf{r_t}}\), regressing it on
 
-By transformation of matrix normal distribution(Wikipedia contributors
-2019)
+\[\bm{\mathbf{f_t=\mathop{\text{E}}[f]+B(f_t-\mathop{\text{E}}[f_t])+\epsilon_t}} \]
 
-\[\frac{ (c\mathbf{r_m}-a\mathbf{e})'(c\mathbf{r_m}-a\mathbf{e})}{(c^2-ab)^2}=\frac{c^2a-2ac^2+a^2b}{(c^2-ab)^2}=\frac{a}{ab-c^2} \]
+we have \(\bm{\mathbf{B=I}}\) and thus
 
-we have
+\[ \lambda_0 \bm{\mathbf{e}}+\bm{\mathbf{\lambda}}=\mathop{\text{E}}[\bm{\mathbf{f_t}}]\implies \mathop{\text{E}}[\bm{\mathbf{f_t}}]=\bm{\mathbf{\mathit{r_f}e+\lambda }}  \]
 
-\[ \hat{\alpha}\sim \mathcal{MN}(\mathbf{0,\Sigma},\frac{a}{ab-c^2}) \]
+\hypertarget{when-factors-are-excess-returns}{%
+\paragraph{When factors are excess
+returns}\label{when-factors-are-excess-returns}}
 
-which degenerated to \(\mathcal{N}(0,\mathbf{\frac{a}{ab-c^2}\Sigma})\)
-since
-\(\Sigma \otimes \frac{a}{ab-c^2}=\frac{a}{ab-c^2}\Sigma\).(Wikipedia
-contributors 2019) For the same reason,
-\(\hat{\beta}\sim\mathcal{N}(\mathbf{\beta},\frac{b}{ab-c^2}\Sigma)\)
+If \(\bm{\mathbf{f_t}}\) is excess return for some tradable assets on
+time \(t\), e.g.~
 
-FOC w.r.t \(\Sigma\)(Petersen and Pedersen 2012):
+\[ f_{k,t}=r_{a,t}-r_{b,t} \]
 
-\[ \frac{\partial \log L}{\partial \Sigma}=\frac{1}{2}(\Sigma^-\mathbf{(r'-\alpha e'-\beta r_m')}\mathbf{(r'-\alpha e'-\beta r_m')}'\Sigma^-)'-\frac{T}{2}\Sigma'^-=0 \]
+where \(r_{a,t}\) and \(r_{b,t}\) is some componets in
+\(\bm{\mathbf{r_t}}\), that is
 
-hence
+\[ f_{k,t}=\begin{bmatrix}
+  0&\cdots&1&\cdots&0&\cdots&-1&\cdots&0\\
+\end{bmatrix}\bm{\mathbf{r_t}} \]
 
-\[ \hat{\Sigma}= \mathbf{(r'-\hat{\alpha} e'-\hat{\beta} r_m')}\mathbf{(r'-\hat{\alpha} e'-\hat{\beta} r_m')}'/T\]
+where the \(a\)th componets is \(1\) while \(b\)th is \(-1\). If each
+componets is excess return, we may represent \(\bm{\mathbf{f_t=Cr_t}}\)
+where each row of \(\bm{\mathbf{C}}\) of such form(All zero but a \(1\)
+and a \(-1\)). Recall
 
-Where
+\[ \bm{\mathbf{r_t=\alpha+Bf_t+\epsilon_t}} \]
 
-\[ \mathbf{(r'-\hat{\alpha} e'-\hat{\beta} r_m')}=\mathbf{r'}(\mathbf{I}-\frac{c\mathbf{r_me'}-a\mathbf{ee'}-b\mathbf{r_mr_m'}+c\mathbf{er_m'}}{c^2-ab}) \]
+It follows that
 
-Easy to verify
-\(\frac{c\mathbf{r_me'}-a\mathbf{ee'}-b\mathbf{r_mr_m'}+c\mathbf{er_m'}}{c^2-ab}\)
-is symmetric and idempotent, thus
+\[ \bm{\mathbf{f_t=Cr_t=C\alpha+CBf_t+\epsilon}} \]
+
+thus \(\bm{\mathbf{CB=I}}\). Recall
 
 \[ \begin{aligned}
-  \rank(\mathbf{I}-\frac{c\mathbf{r_me'}-a\mathbf{ee'}-b\mathbf{r_mr_m'}+c\mathbf{er_m'}}{c^2-ab})&=\tr(\mathbf{I}-\frac{c\mathbf{r_me'}-a\mathbf{ee'}-b\mathbf{r_mr_m'}+c\mathbf{er_m'}}{c^2-ab})
-  \\&=T-\frac{2c^2-2ab}{c^2-ab}
-  \\&=T-2
+  r_f \bm{\mathbf{e}}+\bm{\mathbf{B\lambda}}=\mathop{\text{E}}[\bm{\mathbf{r_t}}]
 \end{aligned} \]
 
-By following lemma:
+thus
 
-\begin{quote}
-Suppose symmetric matrix \(p\times p\) \(\mathbf{A}\). It's idempotent
-of rank \(s\) iff there exist a \(p\times s\) \(\mathbf{P}\)
-\(\ni \mathbf{PP'=A}\) and \(\mathbf{P'P=I}\).
-\end{quote}
+\[ \mathop{\text{E}}[\bm{\mathbf{f_t}}]=\lambda \]
 
-\textbf{Proof} Sufficiency is trivial. For necessity, since
-\(\mathbf{A}\) is symmetric and idempotent matrix, it can be spectral
-decompostioned by \(\mathbf{A=Q\Lambda Q'}\). Where the diagonal of
-\(\mathbf{\Lambda}\) is \(s\) 1 and \(p-s\) 0. Thus
+as \(\bm{\mathbf{Ce=0}}\) clearly.
 
-\[ \mathbf{A=Q\Lambda Q'}= \left( \begin{array} { l l } \mathbf{P_1} & \mathbf{P_2} \end{array} \right) \left( \begin{array} { l l } \mathbf { I } _ { s } & 0 \\ 0 & 0 \end{array} \right) \left( \begin{array} { l } \mathbf { P } _ { 1 } ^ { \prime } \\ \mathbf { P } _ { 2 } ^ { \prime } \end{array} \right) = \mathbf { P } _ { 1 } \mathbf { P } _ { 1 } ^ { \prime } \]
-
-Note
-
-\[ \mathbf { I } _ { p } = \mathbf { Q } ^ { \prime } \mathbf { Q } = \left( \begin{array} { c } \mathbf { P } _ { 1 } ^ { \prime } \\ \mathbf { P } _ { 2 } ^ { \prime } \end{array} \right) \left( \begin{array} { c c } \mathbf { P } _ { 1 } & \mathbf { P } _ { 2 } \end{array} \right) = \left( \begin{array} { c c } \mathbf { P } _ { 1 } ^ { \prime } \mathbf { P } _ { 1 } & \mathbf { P } _ { 1 } ^ { \prime } \mathbf { P } _ { 2 } \\ \mathbf { P } _ { 2 } ^ { \prime } \mathbf { P } _ { 1 } & \mathbf { P } _ { 2 } ^ { \prime } \mathbf { P } _ { 2 } \end{array} \right)= \left( \begin{array} { c c } \mathbf { P } _ { 1 } ^ { \prime } \mathbf { P } _ { 1 } & \mathbf{0}\\ \mathbf{0} & \mathbf { P } _ { 2 } ^ { \prime } \mathbf { P } _ { 2 } \end{array} \right)\]
-
-hence\(\mathbf{P_1'P_1=I_s}.\blacksquare\)
-
-We may find
-\(\mathbf{r'P}\sim \mathcal{MN}_{n\times(T-2)}(\mathbf{0},\Sigma,\mathbf{I})\).
-Where
-\(\ep[\mathbf{r'P}]=\ep[\mathbf{r'PP'P}]=\ep[\mathbf{r'AP}]=\mathbf{0}\)
-and thus (Wikipedia contributors 2020)
-
-\[ T\hat{\Sigma}=\mathbf{r'Ar}=\mathbf{r'PP'r}=\mathbf{r'P(r'P)'}\sim W_n(T-2,\Sigma) \]
-
-\newpage
+\hypertarget{icapm}{%
+\subsubsection{ICAPM}\label{icapm}}
 
 \hypertarget{refs}{}
 \begin{cslreferences}
-\leavevmode\hypertarget{ref-petersen2012matrix}{}%
-Petersen, Kaare Brandt, and Michael Syskind Pedersen. 2012. ``The Matrix
-Cookbook, Nov 2012.'' \emph{URL Http://Www2. Imm. Dtu. Dk/Pubdb/P. Php}
-3274: 14.
-
-\leavevmode\hypertarget{ref-wiki:mnt}{}%
-Wikipedia contributors. 2019. ``Matrix Normal Distribution ---
-Wikipedia, the Free Encyclopedia.''
-\url{https://en.wikipedia.org/w/index.php?title=Matrix_normal_distribution\&oldid=902125596}.
-
-\leavevmode\hypertarget{ref-wiki:wst}{}%
----------. 2020. ``Wishart Distribution --- Wikipedia, the Free
-Encyclopedia.''
-\url{https://en.wikipedia.org/w/index.php?title=Wishart_distribution\&oldid=986003757}.
+\leavevmode\hypertarget{ref-farkas1902theorie}{}%
+Farkas, Julius. 1902. ``Theorie Der Einfachen Ungleichungen.''
+\emph{Journal Für Die Reine Und Angewandte Mathematik} 1902 (124):
+1--27.
 \end{cslreferences}
 
 \bibliographystyle{unsrt}

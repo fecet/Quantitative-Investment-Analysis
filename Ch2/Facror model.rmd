@@ -7,9 +7,9 @@ bibliography: references.bib
 output: rticles::arxiv_article
 ---
 
-# CAPM
+## CAPM
 
-## Beta representation
+### Beta representation
 
 Recall the tangency portfolio is $\omega_D=\frac{\mathbf{V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}$. Write $\omega_D=m \mathbf{V^-} (\overline{\mathbf{r}}-r_f\mathbf{e})$ where $m=\frac{1}{\mathbf{e'}\mathbf{V^-} (\overline{\mathbf{r}}-r_f\mathbf{e})}$, then we have
 
@@ -83,7 +83,7 @@ $$ \begin{aligned}
   \\&=\frac{\Delta}{\delta}+\delta(\overline{r}_p-\frac{\alpha}{\delta})^2
 \end{aligned} $$
 
-## CAPM
+### CAPM
 
 In capital market equilibrium, the market portfolio is tangecy portfolio $\overline{r}_D={r}_m$, then
 
@@ -134,6 +134,97 @@ since [Fraction of variance unexplained](https://en.wikipedia.org/wiki/Fraction_
 
 
 ### Testing CAPM
+
+see [GRS.pdf ](GRS.pdf)
+
+## Multi-factor model
+
+### APT
+Recall in the CAPM
+
+$$ \bm{\mathbf{r_t^e=\alpha}}+{\beta r_{m,t}^e+\nu_t} $$
+
+Suppose now there is multi-factor with $k$ risk factor and
+
+$$ \bm{\mathbf{r_t=\alpha+Bf_t+\epsilon_t}} $$
+
+Where $\bm{\mathbf{r_t,\epsilon_t}}$ is $n$ vector while $\bm{\mathbf{f_t}}$ is $k$ vector and $\bm{\mathbf{B}}$ is $n\times k$ matrix. 
+
+Taking expectation:
+
+$$ \bm{\mathbf{r_t=\mathop{\text{E}}[r]+B(f_t-\mathop{\text{E}}[f_t])+\epsilon_t}} $$
+
+Note CAPM is just special case of APT when $k=1$ and $\bm{\mathbf{f_t}}=r_{m,t}$, which is the only factor affecting realized return. Thta is
+
+$$ \bm{\mathbf{r_t=\mathit{r_f}e+\beta \mathop{\text{E}}[\mathit{r_{m}-r_f}]+\beta(\mathit{r_{m,t}}-\mathop{\text{E}}[\mathit{r_{m,t}}])+\epsilon_t}} $$
+
+Assume there is non-arbitrage, that is, if one invest $0$ and take no risk, then the expected return is $0$. Formally, as $n\to \infty$,
+
+$$ \bm{\mathbf{\omega'\begin{bmatrix}
+  \bm{\mathbf{e}}&\bm{\mathbf{B}}
+\end{bmatrix}=0\implies\omega'\mathop{\text{E}}[r]=0}} $$
+
+by Farkas lemma[@farkas1902theorie], that implies
+
+$$ \begin{bmatrix}
+  \bm{\mathbf{e}}&\bm{\mathbf{B}}
+\end{bmatrix}\begin{bmatrix}
+  \lambda_0\\\bm{\mathbf{\lambda}}
+\end{bmatrix}=\mathop{\text{E}}[\bm{\mathbf{r}}] $$
+
+for some $\bm{\mathbf{\lambda\ge 0}}$. Under CAPM, $\lambda_0=r_f$ and $\mathop{\text{E}}[\mathit{r_{m}-r_f}]=\lambda$ clearly. If one take no risk, that is $\bm{\mathbf{B=0}}$, s(he) get a $\lambda_0$ return, that implies $\lambda_0=r_f$ immediately. 
+
+####  When factors are returns
+
+When $\bm{\mathbf{f_t}}$ is $\bm{\mathbf{r_t}}$, regressing it on
+
+$$\bm{\mathbf{f_t=\mathop{\text{E}}[f]+B(f_t-\mathop{\text{E}}[f_t])+\epsilon_t}} $$
+
+we have $\bm{\mathbf{B=I}}$ and thus
+
+$$ \lambda_0 \bm{\mathbf{e}}+\bm{\mathbf{\lambda}}=\mathop{\text{E}}[\bm{\mathbf{f_t}}]\implies \mathop{\text{E}}[\bm{\mathbf{f_t}}]=\bm{\mathbf{\mathit{r_f}e+\lambda }}  $$
+
+####  When factors are excess returns
+
+If $\bm{\mathbf{f_t}}$ is excess return for some tradable assets on time $t$, e.g. 
+
+$$ f_{k,t}=r_{a,t}-r_{b,t} $$
+
+where $r_{a,t}$ and $r_{b,t}$ is some componets in $\bm{\mathbf{r_t}}$, that is
+
+<!-- 0&\cdots&1&\cdots&0&\cdots&-1&\cdots&0\\
+  0&\cdots&1&\cdots&0&\cdots&-1&\cdots&0\\
+  \vdots&&\vdots&&\vdots&&\vdots&&\vdots\\
+  0&\cdots&1&\cdots&0&\cdots&-1&\cdots&0\\ -->
+
+$$ f_{k,t}=\begin{bmatrix}
+  0&\cdots&1&\cdots&0&\cdots&-1&\cdots&0\\
+\end{bmatrix}\bm{\mathbf{r_t}} $$
+
+where the $a$th componets is $1$ while $b$th is $-1$. If each componets is excess return, we may represent $\bm{\mathbf{f_t=Cr_t}}$ where each row of $\bm{\mathbf{C}}$ of such form(All zero but a $1$ and a $-1$). Recall
+
+$$ \bm{\mathbf{r_t=\alpha+Bf_t+\epsilon_t}} $$
+
+It follows that
+
+$$ \bm{\mathbf{f_t=Cr_t=C\alpha+CBf_t+\epsilon}} $$
+
+thus $\bm{\mathbf{CB=I}}$. Recall
+
+$$ \begin{aligned}
+  r_f \bm{\mathbf{e}}+\bm{\mathbf{B\lambda}}=\mathop{\text{E}}[\bm{\mathbf{r_t}}]
+\end{aligned} $$
+
+thus
+
+$$ \mathop{\text{E}}[\bm{\mathbf{f_t}}]=\lambda $$
+
+as $\bm{\mathbf{Ce=0}}$ clearly.
+
+### ICAPM
+
+
+\newpage
 
 
 
