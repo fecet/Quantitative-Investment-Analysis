@@ -7,9 +7,9 @@ bibliography: references.bib
 output: rticles::arxiv_article
 ---
 
-## CAPM
+# CAPM
 
-### Beta representation
+## Beta representation
 
 Recall the tangency portfolio is $\omega_D=\frac{\mathbf{V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}$. Write $\omega_D=m \mathbf{V^-} (\overline{\mathbf{r}}-r_f\mathbf{e})$ where $m=\frac{1}{\mathbf{e'}\mathbf{V^-} (\overline{\mathbf{r}}-r_f\mathbf{e})}$, then we have
 
@@ -83,7 +83,7 @@ $$ \begin{aligned}
   \\&=\frac{\Delta}{\delta}+\delta(\overline{r}_p-\frac{\alpha}{\delta})^2
 \end{aligned} $$
 
-### CAPM
+## CAPM
 
 In capital market equilibrium, the market portfolio is tangecy portfolio $\overline{r}_D={r}_m$, then
 
@@ -104,7 +104,7 @@ $$
 r_i-r_f=\beta_{i,m}(\overline{r}_m-r_f) 
 $$
 
-### Realized return
+## Realized return
 
 Now consider both $r_i$ and $r_m$ is random variable, let $\epsilon$ be a random vector with zero expection and zero covariance with $r_i$ and $r_m$, then
 
@@ -120,7 +120,7 @@ $$
 
 is called **market model**, such $\alpha$ is called **Jensen's alpha**.
 
-### Variance decomposition
+## Variance decomposition
 
 Decomposition the variance as:
 
@@ -133,13 +133,113 @@ $$ R^2=\frac{\beta_i^2\sigma_m^2}{\beta_i^2\sigma_m^2+\sigma^2} $$
 since [Fraction of variance unexplained](https://en.wikipedia.org/wiki/Fraction_of_variance_unexplained).
 
 
-### Testing CAPM
+## Testing CAPM
+
+
+### GRS test
 
 see [GRS.pdf ](GRS.pdf)
 
-## Multi-factor model
+### Cross-sectional regressions
 
-### APT
+By APT, we have
+
+$$ \mathop{\text{E}}[\bm{\mathbf{r_t}}]-r_f \bm{\mathbf{e}}=\bm{\mathbf{B\lambda}} $$
+
+Take market excess return and some firm-level factor, that is
+
+$$ \bm{\mathbf{B\lambda=\begin{bmatrix}
+  \bm{\mathbf{\beta}}&\bm{\mathbf{X}}
+\end{bmatrix}}}\begin{bmatrix}
+  \lambda\\
+  \bm{\mathbf{\gamma}}
+\end{bmatrix} $$
+
+and the regression formula is 
+
+$$ \mathop{\text{E}}[\bm{\mathbf{r_t}}]-r_f \bm{\mathbf{e}}=\lambda_0+\bm{\mathbf{\beta}}\lambda+\bm{\mathbf{X\gamma}}+\bm{\mathbf{\epsilon}}  $$
+
+If CAPM holds, we have
+
+$$ \begin{cases}
+  \lambda=\overline{r_m}-r_f\\
+  \lambda_0=0\\
+  \bm{\mathbf{\gamma =0 }}\\
+  R^2 \approx 1
+\end{cases} $$
+
+Where $\lambda$ is the slope of **SML(Security Market Line)**. However, as we do not know $\overline{r_m}-r_f$, we should run a two pass cross-sectional regression. For example, we may test CAPM in such way:
+
+Firstly, run a TS regression to estimate $\bm{\mathbf{\beta}}$ :
+
+$$ \bm{\mathbf{r_t^e=\alpha}}+\bm{\mathbf{\beta \mathit{r_{m,t}^e}+\epsilon_t}} $$
+
+Now we have a $\bm{\mathbf{\hat{\beta}}}$. In the second pass, we run following regression:
+
+$$ \bm{\mathbf{r_t^e=\lambda_0+\hat{\beta}\mathit{\lambda_t}+\epsilon_t}} $$
+
+If CAPM holds, we have
+
+$$ \mathop{\text{E}}[\bm{\mathbf{\lambda_0=0}}], \mathop{\text{E}}[\lambda_t]=\lambda=\mathop{\text{E}}[r_m^e] $$
+
+then we may use $t$ test as usual.
+
+## Fama-MacBeth in depth
+
+Writing the cross-sectional regression in a matrix form,
+
+$$ \bm{\mathbf{r=X\theta+\epsilon}} $$
+ 
+where 
+
+$$ \bm{\mathbf{X}}=\begin{bmatrix}
+  \bm{\mathbf{e}}&\bm{\mathbf{x_2}}&\cdots&\bm{\mathbf{x_m}}
+\end{bmatrix},\bm{\mathbf{\theta}}=\begin{bmatrix}
+  \theta_1\\\theta_2\\\vdots \\ \theta_m
+\end{bmatrix} $$
+
+The OLS estimator of $\theta$ is given by
+
+$$ \bm{\mathbf{\hat{\theta}}}=\bm{\mathbf{(X'X)^{-1}X'r_t}} $$
+
+Denoted $\bm{\mathbf{W'=(X'X)^{-1}X'}}$ and suppose
+
+$$ \bm{\mathbf{W}}=\begin{bmatrix}
+  \bm{\mathbf{w_1}}&
+  \bm{\mathbf{w_2}}&
+  \cdots&
+  \bm{\mathbf{w_m}}
+\end{bmatrix} $$
+
+each $\bm{\mathbf{w_i}}$ represent a portfolio and $\theta_i$ represents the excess return on corresponding portfolio. Note $\bm{\mathbf{W'X=I}}$, we have
+
+$$\bm{\mathbf{w_i'e}}= \begin{cases}
+  0&i\neq1\\
+  1&i=1
+\end{cases} \text{ and } \bm{\mathbf{w_i'x_j}}=\begin{cases}
+  0&i\neq j\\
+  1&i=j
+\end{cases} $$
+
+
+## CAPM anomalies
+
+However, past surveyresarch has found many $\bm{\mathbf{X}}$ s.t. $\bm{\mathbf{\gamma\neq 0}}$ significantly and even can't not reject $\lambda=0$ in 
+
+$$ \mathop{\text{E}}[\bm{\mathbf{r_t}}]-r_f \bm{\mathbf{e}}=\lambda_0+\bm{\mathbf{\beta}}\lambda+\bm{\mathbf{X\gamma}}+\bm{\mathbf{\epsilon}}  $$
+
+That is known as **CAPM anomalies**.
+
+1. 
+   CAPM anomalies rise because of mispricing.
+
+
+2. 
+   CAPM anomalies rise because of other sources of risks. nonzero $\bm{\mathbf{\alpha}}$ contains missing risk factors.
+
+# Multi-factors model
+
+## APT
 Recall in the CAPM
 
 $$ \bm{\mathbf{r_t^e=\alpha}}+{\beta r_{m,t}^e+\nu_t} $$
@@ -174,7 +274,7 @@ $$ \begin{bmatrix}
 
 for some $\bm{\mathbf{\lambda\ge 0}}$. Under CAPM, $\lambda_0=r_f$ and $\mathop{\text{E}}[\mathit{r_{m}-r_f}]=\lambda$ clearly. If one take no risk, that is $\bm{\mathbf{B=0}}$, s(he) get a $\lambda_0$ return, that implies $\lambda_0=r_f$ immediately. 
 
-####  When factors are returns
+###  When factors are returns
 
 When $\bm{\mathbf{f_t}}$ is $\bm{\mathbf{r_t}}$, regressing it on
 
@@ -184,7 +284,7 @@ we have $\bm{\mathbf{B=I}}$ and thus
 
 $$ \lambda_0 \bm{\mathbf{e}}+\bm{\mathbf{\lambda}}=\mathop{\text{E}}[\bm{\mathbf{f_t}}]\implies \mathop{\text{E}}[\bm{\mathbf{f_t}}]=\bm{\mathbf{\mathit{r_f}e+\lambda }}  $$
 
-####  When factors are excess returns
+###  When factors are excess returns
 
 If $\bm{\mathbf{f_t}}$ is excess return for some tradable assets on time $t$, e.g. 
 
@@ -221,11 +321,13 @@ $$ \mathop{\text{E}}[\bm{\mathbf{f_t}}]=\lambda $$
 
 as $\bm{\mathbf{Ce=0}}$ clearly.
 
-### ICAPM
+## ICAPM
 
 SKIP
 
-### Test Multi-factor model
+## Test Multi-factor model
+
+see [GRS.pdf](GRS.pdf)
 
 
 
@@ -272,5 +374,5 @@ thus have
 
 $$ \hat{\Sigma}= \sum_{t=1}^T (\mathbf { r_t^e } -\hat{\alpha}-\hat{\beta} r_{m,t}^e)(\mathbf { r_t^e } -\hat{\alpha}-\hat{\beta} r_{m,t}^e)'/T$$
 
-#### Matrix Approch -->
+## Matrix Approch -->
 

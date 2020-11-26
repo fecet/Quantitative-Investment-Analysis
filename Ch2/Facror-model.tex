@@ -22,12 +22,6 @@
   \texttt{\href{mailto:xiezej@gmail.com}{\nolinkurl{xiezej@gmail.com}}} \\
   }
 
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newenvironment{cslreferences}%
-  {\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
-  {\par}
 
 
 \begin{document}
@@ -42,10 +36,10 @@
 
 
 \hypertarget{capm}{%
-\subsection{CAPM}\label{capm}}
+\section{CAPM}\label{capm}}
 
 \hypertarget{beta-representation}{%
-\subsubsection{Beta representation}\label{beta-representation}}
+\subsection{Beta representation}\label{beta-representation}}
 
 Recall the tangency portfolio is
 \(\omega_D=\frac{\mathbf{V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}{\mathbf{e'V^-}(\overline{\mathbf{r}}-r_f\mathbf{e})}\).
@@ -129,7 +123,7 @@ and
 \end{aligned} \]
 
 \hypertarget{capm-1}{%
-\subsubsection{CAPM}\label{capm-1}}
+\subsection{CAPM}\label{capm-1}}
 
 In capital market equilibrium, the market portfolio is tangecy portfolio
 \(\overline{r}_D={r}_m\), then
@@ -156,7 +150,7 @@ r_i-r_f=\beta_{i,m}(\overline{r}_m-r_f)
 \]
 
 \hypertarget{realized-return}{%
-\subsubsection{Realized return}\label{realized-return}}
+\subsection{Realized return}\label{realized-return}}
 
 Now consider both \(r_i\) and \(r_m\) is random variable, let
 \(\epsilon\) be a random vector with zero expection and zero covariance
@@ -177,7 +171,7 @@ is called \textbf{market model}, such \(\alpha\) is called
 \textbf{Jensen's alpha}.
 
 \hypertarget{variance-decomposition}{%
-\subsubsection{Variance decomposition}\label{variance-decomposition}}
+\subsection{Variance decomposition}\label{variance-decomposition}}
 
 Decomposition the variance as:
 
@@ -192,15 +186,128 @@ since
 of variance unexplained}.
 
 \hypertarget{testing-capm}{%
-\subsubsection{Testing CAPM}\label{testing-capm}}
+\subsection{Testing CAPM}\label{testing-capm}}
+
+\hypertarget{grs-test}{%
+\subsubsection{GRS test}\label{grs-test}}
 
 see \url{GRS.pdf}
 
-\hypertarget{multi-factor-model}{%
-\subsection{Multi-factor model}\label{multi-factor-model}}
+\hypertarget{cross-sectional-regressions}{%
+\subsubsection{Cross-sectional
+regressions}\label{cross-sectional-regressions}}
+
+By APT, we have
+
+\[ \mathop{\text{E}}[\bm{\mathbf{r_t}}]-r_f \bm{\mathbf{e}}=\bm{\mathbf{B\lambda}} \]
+
+Take market excess return and some firm-level factor, that is
+
+\[ \bm{\mathbf{B\lambda=\begin{bmatrix}
+  \bm{\mathbf{\beta}}&\bm{\mathbf{X}}
+\end{bmatrix}}}\begin{bmatrix}
+  \lambda\\
+  \bm{\mathbf{\gamma}}
+\end{bmatrix} \]
+
+and the regression formula is
+
+\[ \mathop{\text{E}}[\bm{\mathbf{r_t}}]-r_f \bm{\mathbf{e}}=\lambda_0+\bm{\mathbf{\beta}}\lambda+\bm{\mathbf{X\gamma}}+\bm{\mathbf{\epsilon}}  \]
+
+If CAPM holds, we have
+
+\[ \begin{cases}
+  \lambda=\overline{r_m}-r_f\\
+  \lambda_0=0\\
+  \bm{\mathbf{\gamma =0 }}\\
+  R^2 \approx 1
+\end{cases} \]
+
+Where \(\lambda\) is the slope of \textbf{SML(Security Market Line)}.
+However, as we do not know \(\overline{r_m}-r_f\), we should run a two
+pass cross-sectional regression. For example, we may test CAPM in such
+way:
+
+Firstly, run a TS regression to estimate \(\bm{\mathbf{\beta}}\) :
+
+\[ \bm{\mathbf{r_t^e=\alpha}}+\bm{\mathbf{\beta \mathit{r_{m,t}^e}+\epsilon_t}} \]
+
+Now we have a \(\bm{\mathbf{\hat{\beta}}}\). In the second pass, we run
+following regression:
+
+\[ \bm{\mathbf{r_t^e=\lambda_0+\hat{\beta}\mathit{\lambda_t}+\epsilon_t}} \]
+
+If CAPM holds, we have
+
+\[ \mathop{\text{E}}[\bm{\mathbf{\lambda_0=0}}], \mathop{\text{E}}[\lambda_t]=\lambda=\mathop{\text{E}}[r_m^e] \]
+
+then we may use \(t\) test as usual.
+
+\hypertarget{fama-macbeth-in-depth}{%
+\subsection{Fama-MacBeth in depth}\label{fama-macbeth-in-depth}}
+
+Writing the cross-sectional regression in a matrix form,
+
+\[ \bm{\mathbf{r=X\theta+\epsilon}} \]
+
+where
+
+\[ \bm{\mathbf{X}}=\begin{bmatrix}
+  \bm{\mathbf{e}}&\bm{\mathbf{x_2}}&\cdots&\bm{\mathbf{x_m}}
+\end{bmatrix},\bm{\mathbf{\theta}}=\begin{bmatrix}
+  \theta_1\\\theta_2\\\vdots \\ \theta_m
+\end{bmatrix} \]
+
+The OLS estimator of \(\theta\) is given by
+
+\[ \bm{\mathbf{\hat{\theta}}}=\bm{\mathbf{(X'X)^{-1}X'r_t}} \]
+
+Denoted \(\bm{\mathbf{W'=(X'X)^{-1}X'}}\) and suppose
+
+\[ \bm{\mathbf{W}}=\begin{bmatrix}
+  \bm{\mathbf{w_1}}&
+  \bm{\mathbf{w_2}}&
+  \cdots&
+  \bm{\mathbf{w_m}}
+\end{bmatrix} \]
+
+each \(\bm{\mathbf{w_i}}\) represent a portfolio and \(\theta_i\)
+represents the excess return on corresponding portfolio. Note
+\(\bm{\mathbf{W'X=I}}\), we have
+
+\[\bm{\mathbf{w_i'e}}= \begin{cases}
+  0&i\neq1\\
+  1&i=1
+\end{cases} \text{ and } \bm{\mathbf{w_i'x_j}}=\begin{cases}
+  0&i\neq j\\
+  1&i=j
+\end{cases} \]
+
+\hypertarget{capm-anomalies}{%
+\subsection{CAPM anomalies}\label{capm-anomalies}}
+
+However, past surveyresarch has found many \(\bm{\mathbf{X}}\) s.t.
+\(\bm{\mathbf{\gamma\neq 0}}\) significantly and even can't not reject
+\(\lambda=0\) in
+
+\[ \mathop{\text{E}}[\bm{\mathbf{r_t}}]-r_f \bm{\mathbf{e}}=\lambda_0+\bm{\mathbf{\beta}}\lambda+\bm{\mathbf{X\gamma}}+\bm{\mathbf{\epsilon}}  \]
+
+That is known as \textbf{CAPM anomalies}.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  CAPM anomalies rise because of mispricing.
+\item
+  CAPM anomalies rise because of other sources of risks. nonzero
+  \(\bm{\mathbf{\alpha}}\) contains missing risk factors.
+\end{enumerate}
+
+\hypertarget{multi-factors-model}{%
+\section{Multi-factors model}\label{multi-factors-model}}
 
 \hypertarget{apt}{%
-\subsubsection{APT}\label{apt}}
+\subsection{APT}\label{apt}}
 
 Recall in the CAPM
 
@@ -231,7 +338,7 @@ risk, then the expected return is \(0\). Formally, as \(n\to \infty\),
   \bm{\mathbf{e}}&\bm{\mathbf{B}}
 \end{bmatrix}=0\implies\omega'\mathop{\text{E}}[r]=0}} \]
 
-by Farkas lemma(Farkas 1902), that implies
+by Farkas lemma({\textbf{???}}), that implies
 
 \[ \begin{bmatrix}
   \bm{\mathbf{e}}&\bm{\mathbf{B}}
@@ -245,7 +352,8 @@ take no risk, that is \(\bm{\mathbf{B=0}}\), s(he) get a \(\lambda_0\)
 return, that implies \(\lambda_0=r_f\) immediately.
 
 \hypertarget{when-factors-are-returns}{%
-\paragraph{When factors are returns}\label{when-factors-are-returns}}
+\subsubsection{When factors are
+returns}\label{when-factors-are-returns}}
 
 When \(\bm{\mathbf{f_t}}\) is \(\bm{\mathbf{r_t}}\), regressing it on
 
@@ -256,7 +364,7 @@ we have \(\bm{\mathbf{B=I}}\) and thus
 \[ \lambda_0 \bm{\mathbf{e}}+\bm{\mathbf{\lambda}}=\mathop{\text{E}}[\bm{\mathbf{f_t}}]\implies \mathop{\text{E}}[\bm{\mathbf{f_t}}]=\bm{\mathbf{\mathit{r_f}e+\lambda }}  \]
 
 \hypertarget{when-factors-are-excess-returns}{%
-\paragraph{When factors are excess
+\subsubsection{When factors are excess
 returns}\label{when-factors-are-excess-returns}}
 
 If \(\bm{\mathbf{f_t}}\) is excess return for some tradable assets on
@@ -295,15 +403,16 @@ thus
 as \(\bm{\mathbf{Ce=0}}\) clearly.
 
 \hypertarget{icapm}{%
-\subsubsection{ICAPM}\label{icapm}}
+\subsection{ICAPM}\label{icapm}}
 
-\hypertarget{refs}{}
-\begin{cslreferences}
-\leavevmode\hypertarget{ref-farkas1902theorie}{}%
-Farkas, Julius. 1902. ``Theorie Der Einfachen Ungleichungen.''
-\emph{Journal Für Die Reine Und Angewandte Mathematik} 1902 (124):
-1--27.
-\end{cslreferences}
+SKIP
+
+\hypertarget{test-multi-factor-model}{%
+\subsection{Test Multi-factor model}\label{test-multi-factor-model}}
+
+see \url{GRS.pdf}
+
+\newpage
 
 \bibliographystyle{unsrt}
 \bibliography{references.bib}
