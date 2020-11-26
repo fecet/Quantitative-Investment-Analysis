@@ -136,7 +136,7 @@ $$ \omega_p'\mathbf{V}\omega_q=\omega_p'\mathbf{(\lambda \overline{r}+\gamma e)}
 Moreover, if
 
 1.
-    $p$ is GMV portfolio, then
+    $q$ is GMV portfolio, then
 
     $$ \omega_p'\mathbf{(\lambda \overline{r}+\gamma e)} =\omega_p'(\frac{1}{\delta}\mathbf{e})=\frac{1}{\delta} $$
 2.
