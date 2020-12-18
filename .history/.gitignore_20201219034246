@@ -1,0 +1,10 @@
+# dir 不需要提交的目录
+/.vscode
+​
+# file 不需要提交的文件
+*.rmd
+*.tex
+*.md
+*.csv
+
+.Rproj.user
