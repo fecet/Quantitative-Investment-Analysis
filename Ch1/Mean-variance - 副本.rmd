@@ -366,4 +366,3 @@ hence
 
 $$ \omega=\frac{\mathbf{V^-}E(\mathbf{{r}})}{b}=\frac{\mathbf{V^-}(\mathbf{\overline{r}}-r_f\mathbf{e})}{b}$$
 
-
