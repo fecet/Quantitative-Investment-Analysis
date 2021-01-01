@@ -1,10 +1,10 @@
 # dir 不需要提交的目录
-/.vscode
-​
+.vscode/
+.Rproj.user/
+.history/
 # file 不需要提交的文件
 *.rmd
 *.tex
 *.md
-.Rproj.user
+*.csv
 
-.history
